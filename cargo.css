@@ -1834,100 +1834,109 @@ a {
   }
 }
 
-
 /* Update pada section Technical Specs agar mendukung animasi latar */
 .tech-specs-section {
-    position: relative; /* Wajib agar elemen absolute di dalamnya terkunci di sini */
-    padding: 8rem 5%;
-    background-color: var(--bg-light);
-    overflow: hidden; /* Mencegah pesawat terlihat saat di luar area section */
+  position: relative; /* Wajib agar elemen absolute di dalamnya terkunci di sini */
+  padding: 8rem 5%;
+  background-color: var(--bg-light);
+  overflow: hidden; /* Mencegah pesawat terlihat saat di luar area section */
 }
 
 /* Pastikan konten tabel berada di atas animasi */
 .specs-container {
-    position: relative;
-    z-index: 2; /* Menempatkan tabel di atas SVG pesawat */
-    max-width: 1000px;
-    margin: 0 auto;
+  position: relative;
+  z-index: 2; /* Menempatkan tabel di atas SVG pesawat */
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 /* Memperhalus tampilan tabel agar efek transparan animasi terlihat sedikit di belakangnya */
 .table-responsive {
-    background: rgba(255, 255, 255, 0.9); /* Sedikit transparan agar menyatu */
-    backdrop-filter: blur(5px); /* Efek blur halus di belakang tabel */
+  background: rgba(255, 255, 255, 0.9); /* Sedikit transparan agar menyatu */
+  backdrop-filter: blur(5px); /* Efek blur halus di belakang tabel */
 }
 
 /* --- BRAND RIBBON (AUSTRALIA EDITION) --- */
 .brand-ribbon-section {
-    background-color: #09090b; 
-    padding: 2.5rem 0; /* Padding diperbesar agar logo besar tidak sesak */
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    overflow: hidden;
-    white-space: nowrap;
+  background-color: #09090b;
+  padding: 2.5rem 0; /* Padding diperbesar agar logo besar tidak sesak */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .brand-ribbon-wrapper {
-    display: flex;
-    width: 100%;
-    overflow: hidden;
-    user-select: none;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
 }
 
 .brand-ribbon-content {
-    display: flex;
-    align-items: center;
-    gap: 4rem; /* Jarak antar item */
-    padding-right: 4rem; /* WAJIB: Sama dengan gap agar loop nyambung sempurna */
-    animation: scrollBrand 25s linear infinite;
-    flex-shrink: 0;
-    min-width: max-content; /* WAJIB: Agar container tidak menyusut */
+  display: flex;
+  align-items: center;
+  gap: 4rem; /* Jarak antar item */
+  padding-right: 4rem; /* WAJIB: Sama dengan gap agar loop nyambung sempurna */
+  animation: scrollBrand 25s linear infinite;
+  flex-shrink: 0;
+  min-width: max-content; /* WAJIB: Agar container tidak menyusut */
 }
 
 .brand-item {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .brand-item img {
-    height: 50px; /* DIPERBESAR dari 35px agar seimbang dengan teks */
-    width: auto;
-    /* filter: brightness(0) invert(1); */
-    object-fit: contain;
+  height: 50px; /* DIPERBESAR dari 35px agar seimbang dengan teks */
+  width: auto;
+  /* filter: brightness(0) invert(1); */
+  object-fit: contain;
 }
 
 .brand-loc {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 800;
-    font-size: 1.5rem; /* Menyesuaikan agar proporsional dengan logo 60px */
-    color: #ffffff;
-    letter-spacing: 0.1em;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem; /* Menyesuaikan agar proporsional dengan logo 60px */
+  color: #ffffff;
+  letter-spacing: 0.1em;
 }
 
 .brand-separator {
-    color: var(--brand-orange);
-    font-size: 1.5rem;
+  color: var(--brand-orange);
+  font-size: 1.5rem;
 }
 
 /* Animasi Marquee: Berjalan dari 0 ke -100% (1 blok penuh) */
 @keyframes scrollBrand {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 /* Hover effect: Melambat saat di-hover */
 .brand-ribbon-wrapper:hover .brand-ribbon-content {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
 
 /* Responsif HP */
 @media (max-width: 768px) {
-    .brand-item img { height: 40px; }
-    .brand-loc { font-size: 1.5rem; }
-    .brand-ribbon-content { gap: 2rem; padding-right: 2rem; }
+  .brand-item img {
+    height: 40px;
+  }
+  .brand-loc {
+    font-size: 1.5rem;
+  }
+  .brand-ribbon-content {
+    gap: 2rem;
+    padding-right: 2rem;
+  }
 }
-
 
 /* ==========================================
    ANIMASI BIG STATEMENT (3D UNFOLD)
@@ -1935,49 +1944,49 @@ a {
 
 /* Berikan perspektif pada container teks agar efek 3D (rotateX) terlihat nyata */
 .massive-text {
-    perspective: 1000px;
+  perspective: 1000px;
 }
 
 /* State Awal (Saat elemen belum terlihat di layar / disembunyikan) */
 .statement-anim .statement-eyebrow {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .statement-anim .text-line {
-    display: inline-block;
-    opacity: 0;
-    /* Teks ditekuk ke belakang sejauh 45 derajat dan digeser ke bawah */
-    transform: translateY(60px) rotateX(-45deg);
-    transform-origin: bottom center;
-    transition: all 0.9s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: inline-block;
+  opacity: 0;
+  /* Teks ditekuk ke belakang sejauh 45 derajat dan digeser ke bawah */
+  transform: translateY(60px) rotateX(-45deg);
+  transform-origin: bottom center;
+  transition: all 0.9s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 /* State Akhir (Saat elemen masuk ke layar dan JS menambahkan class .active) */
 .statement-anim.active .statement-eyebrow {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.1s; /* Masuk paling awal */
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s; /* Masuk paling awal */
 }
 
 .statement-anim.active .line-1 {
-    opacity: 1;
-    transform: translateY(0) rotateX(0);
-    transition-delay: 0.3s; /* Menyusul setelah eyebrow */
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+  transition-delay: 0.3s; /* Menyusul setelah eyebrow */
 }
 
 .statement-anim.active .line-2 {
-    opacity: 1;
-    transform: translateY(0) rotateX(0);
-    transition-delay: 0.5s; /* Menyusul baris 1 */
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+  transition-delay: 0.5s; /* Menyusul baris 1 */
 }
 
 .statement-anim.active .line-3 {
-    opacity: 1;
-    /* Kata IMPACT diberikan sedikit efek scale agar lebih menonjol di akhir */
-    transform: translateY(0) rotateX(0) scale(1.05);
-    transition-delay: 0.7s; /* Masuk paling akhir sebagai punchline */
+  opacity: 1;
+  /* Kata IMPACT diberikan sedikit efek scale agar lebih menonjol di akhir */
+  transform: translateY(0) rotateX(0) scale(1.05);
+  transition-delay: 0.7s; /* Masuk paling akhir sebagai punchline */
 }
 
 /* ==========================================
@@ -1987,418 +1996,493 @@ a {
    LIGHT PREMIUM CTA (ORANGE CARD)
    ========================================== */
 .cargo-cta-light {
-    background-color: #ffffff; /* Latar belakang halaman putih bersih */
-    padding: 8rem 5%;
-    overflow: hidden; /* Menjaga agar foto yang melayang tidak memunculkan scroll horizontal */
+  background-color: #ffffff; /* Latar belakang halaman putih bersih */
+  padding: 8rem 5%;
+  overflow: hidden; /* Menjaga agar foto yang melayang tidak memunculkan scroll horizontal */
 }
 
 .cta-light-container {
-    max-width: 1200px;
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Kartu Oranye Elegan */
 .cta-orange-card {
-    background: var(--brand-orange);
-    border-radius: 32px;
-    padding: 5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-    position: relative;
-    box-shadow: 0 30px 60px rgba(255, 94, 0, 0.25);
+  background: var(--brand-orange);
+  border-radius: 32px;
+  padding: 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 30px 60px rgba(255, 94, 0, 0.25);
 }
 
 /* Pola titik-titik samar (Blueprint aesthetic) pada kartu oranye */
 .cta-orange-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.25) 2px, transparent 2px);
-    background-size: 30px 30px;
-    border-radius: 32px;
-    opacity: 0.4;
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.25) 2px,
+    transparent 2px
+  );
+  background-size: 30px 30px;
+  border-radius: 32px;
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 /* Konten Teks */
 .cta-text-content {
-    position: relative;
-    z-index: 2;
-    color: #ffffff;
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
 }
 
 .cta-text-content h2 {
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    color: #ffffff;
-    font-weight: 700;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .cta-text-content p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
-    opacity: 0.95;
-    max-width: 90%;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  opacity: 0.95;
+  max-width: 90%;
 }
 
 .cta-actions {
-    display: flex;
-    gap: 1.2rem;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
 }
 
 /* Tombol Khusus di Dalam Kartu Oranye */
 .btn-white {
-    background: #ffffff;
-    color: var(--brand-orange);
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #ffffff;
+  color: var(--brand-orange);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .btn-white:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .btn-outline-white {
-    background: transparent;
-    color: #ffffff;
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    font-weight: 600;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    transition: all 0.3s ease;
+  background: transparent;
+  color: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .btn-outline-white:hover {
-    border-color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* --- VISUAL KARTU FOTO (FLOATING) --- */
 .cta-visual-cards {
-    position: relative;
-    height: 100%;
-    min-height: 400px;
-    z-index: 2;
+  position: relative;
+  height: 100%;
+  min-height: 400px;
+  z-index: 2;
 }
 
 /* Bingkai putih ala foto polaroid/katalog premium */
 .photo-card {
-    position: absolute;
-    background: #ffffff;
-    padding: 14px;
-    border-radius: 16px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), z-index 0s;
+  position: absolute;
+  background: #ffffff;
+  padding: 12px; /* Padding putih di sekeliling foto */
+  border-radius: 12px; /* Sesuai gambar design.jpg */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  width: 330px; /* Ukuran tetap agar wajah terjaga proporsinya */
 }
 
 .photo-card img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+  display: block;
+  width: 100%;
+  height: auto; /* Memastikan foto tidak terpotong (menjaga wajah) */
+  object-fit: contain; /* Menampilkan seluruh area foto */
 }
-
 /* Mengatur Posisi dan Rotasi Foto agar Terlihat "Dilempar" Rapi */
+/* Mengatur Posisi Persis seperti design.jpg */
 .card-1 {
-    width: 85%;
-    top: -15%;
-    right: -15%;
-    transform: rotate(4deg);
-    z-index: 2;
+  top: -20px; /* Terry di atas */
+  right: 20px;
+  transform: rotate(4deg);
+  z-index: 1;
 }
 
 .card-2 {
-    width: 75%;
-    bottom: -15%;
-    left: -5%;
-    transform: rotate(-5deg);
-    z-index: 1;
+  bottom: -40px; /* Kristian menonjol di bawah depan */
+  right: 180px; /* Geser ke kiri sedikit agar tumpang tindih */
+  transform: rotate(-3deg);
+  z-index: 5; /* Pastikan Kristian di depan (paling tinggi) */
 }
 
-/* Efek interaktif: Foto akan lurus dan membesar saat mouse diarahkan */
+/* Efek Hover tetap ada */
 .photo-card:hover {
-    transform: scale(1.05) translateY(-10px) rotate(0deg);
-    z-index: 3;
-    box-shadow: 0 35px 60px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05) rotate(0deg);
+  z-index: 10;
 }
-
 /* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 992px) {
-    .cta-orange-card {
-        grid-template-columns: 1fr;
-        padding: 4rem 3rem;
-        text-align: center;
-        gap: 6rem;
-    }
-    .cta-text-content p {
-        margin: 0 auto 2.5rem auto;
-    }
-    .cta-actions {
-        justify-content: center;
-    }
-    .cta-visual-cards {
-        min-height: 350px;
-    }
-    .card-1 { right: -5%; width: 70%; top: -10%; }
-    .card-2 { left: -5%; width: 70%; bottom: -10%; }
+  .photo-card {
+    position: absolute;
+    background: #ffffff;
+    padding: 12px; /* Padding putih di sekeliling foto */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 350px; /* Ukuran tetap agar wajah terjaga proporsinya */
+  }
+
+  .cta-orange-card {
+    grid-template-columns: 1fr;
+    padding: 4rem 3rem;
+    text-align: center;
+    gap: 6rem;
+  }
+  .cta-text-content p {
+    margin: 0 auto 2.5rem auto;
+  }
+  .cta-actions {
+    justify-content: center;
+  }
+  .cta-visual-cards {
+    min-height: 520px;
+  }
+  .card-1 {
+    top: -20px; /* Terry di atas */
+    right: 20px;
+    transform: rotate(4deg);
+    z-index: 1;
+  }
+
+  .card-2 {
+    bottom: -40px; /* Kristian menonjol di bawah depan */
+    right: 180px; /* Geser ke kiri sedikit agar tumpang tindih */
+    transform: rotate(-3deg);
+    z-index: 5; /* Pastikan Kristian di depan (paling tinggi) */
+  }
 }
 
 @media (max-width: 768px) {
-    .cargo-cta-light { padding: 6rem 5%; }
-    .cta-orange-card { padding: 3rem 2rem; border-radius: 24px; }
-    .card-1 { top: -20%; right: -5%; width: 85%; }
-    .card-2 { bottom: -10%; left: -5%; width: 85%; }
+  .photo-card {
+    position: absolute;
+    background: #ffffff;
+    padding: 12px; /* Padding putih di sekeliling foto */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 100px; /* Ukuran tetap agar wajah terjaga proporsinya */
+  }
+
+  .cta-orange-card {
+    grid-template-columns: 1fr;
+    padding: 4rem 3rem;
+    text-align: center;
+    gap: 6rem;
+  }
+  .cargo-cta-light {
+    padding: 6rem 5%;
+  }
+  .cta-orange-card {
+    padding: 3rem 2rem;
+    border-radius: 24px;
+  }
+  .card-1 {
+    top: -20%;
+    right: -5%;
+    width: 85%;
+  }
+  .card-2 {
+    bottom: -10%;
+    left: -5%;
+    width: 85%;
+  }
 }
 
 /* ==========================================
    PARTNER SCROLLYTELLING SECTION (WITH BG CROSSFADE)
    ========================================== */
 .partner-scrolly {
-    position: relative;
-    background-color: #09090b; 
-    height: 150vh; /* Memberi ruang scroll */
-    padding-top: 1px; /* Mencegah margin collapse / kebocoran layout */
+  position: relative;
+  background-color: #09090b;
+  height: 150vh; /* Memberi ruang scroll */
+  padding-top: 1px; /* Mencegah margin collapse / kebocoran layout */
 }
 
 .partner-sticky {
-    position: sticky;
-    top: 15vh; /* Berhenti sedikit di bawah ujung atas layar agar elegan */
-    width: 100%;
-    overflow: hidden;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  position: sticky;
+  top: 15vh; /* Berhenti sedikit di bawah ujung atas layar agar elegan */
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 /* LAYER BACKGROUND UNTUK EFEK CROSSFADE */
 .bg-phase {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Efek parallax background */
-    opacity: 0;
-    transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1); /* Transisi gambar halus */
-    z-index: 0;
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Efek parallax background */
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1); /* Transisi gambar halus */
+  z-index: 0;
 }
 
 .bg-phase.active {
-    opacity: 1;
+  opacity: 1;
 }
 
 .cta-overlay-sticky {
-    position: absolute;
-    inset: 0;
-    /* Gradien gelap Kiri dan Kanan agar teks terbaca di kedua sisi */
-    background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.95) 100%);
-    z-index: 1; /* Di atas gambar, di bawah teks */
+  position: absolute;
+  inset: 0;
+  /* Gradien gelap Kiri dan Kanan agar teks terbaca di kedua sisi */
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  z-index: 1; /* Di atas gambar, di bawah teks */
 }
 
 /* Teknik Grid agar tinggi otomatis menyesuaikan padding */
 .partner-content-stack {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    padding: 8rem 5%; /* Kembali menggunakan ukuran padding original */
-    position: relative;
-    z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  padding: 8rem 5%; /* Kembali menggunakan ukuran padding original */
+  position: relative;
+  z-index: 2;
 }
 
 .partner-container {
-    grid-column: 1;
-    grid-row: 1;
-    display: flex;
-    align-items: center;
-    visibility: hidden;
-    pointer-events: none;
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .partner-container.active {
-    visibility: visible;
-    pointer-events: auto;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* PHASE 1: KIRI */
 .p-phase-1 .cta-content {
-    opacity: 0;
-    transform: translateX(-100px);
-    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-    max-width: 600px;
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  max-width: 600px;
 }
 
 .p-phase-1.active .cta-content {
-    opacity: 1;
-    transform: translateX(0);
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* PHASE 2: KANAN */
 .p-phase-2 {
-    justify-content: flex-end; /* Paksa posisi ke kanan */
+  justify-content: flex-end; /* Paksa posisi ke kanan */
 }
 
 .p-phase-2 .cta-content.right-aligned {
-    opacity: 0;
-    transform: translateX(100px); /* Masuk dari kanan */
-    text-align: right;
-    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-    max-width: 600px;
+  opacity: 0;
+  transform: translateX(100px); /* Masuk dari kanan */
+  text-align: right;
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  max-width: 600px;
 }
 
 .p-phase-2.active .cta-content.right-aligned {
-    opacity: 1;
-    transform: translateX(0);
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .p-phase-2 .cta-header {
-    justify-content: flex-end; /* Membalik teks eyebrow ke kanan */
+  justify-content: flex-end; /* Membalik teks eyebrow ke kanan */
 }
 
 /* Responsif HP */
 @media (max-width: 768px) {
-    .partner-content-stack {
-        padding: 5rem 5%; /* Padding HP dikurangi agar tidak terlalu besar */
-    }
-    .p-phase-2 .cta-content.right-aligned {
-        text-align: left; /* Teks kembali rata kiri di layar sempit */
-    }
-    .p-phase-2 .cta-header {
-        justify-content: flex-start;
-    }
-    .cta-overlay-sticky {
-        background: rgba(0,0,0,0.85); /* Lebih gelap merata di HP */
-    }
+  .partner-content-stack {
+    padding: 5rem 5%; /* Padding HP dikurangi agar tidak terlalu besar */
+  }
+  .p-phase-2 .cta-content.right-aligned {
+    text-align: left; /* Teks kembali rata kiri di layar sempit */
+  }
+  .p-phase-2 .cta-header {
+    justify-content: flex-start;
+  }
+  .cta-overlay-sticky {
+    background: rgba(0, 0, 0, 0.85); /* Lebih gelap merata di HP */
+  }
 }
 
 /* ==========================================
    ENTERPRISE ECOSYSTEM (PREMIUM MARQUEE)
    ========================================== */
 .trusted-partners-section {
-    background-color: var(--bg-card); /* Warna abu-abu sangat muda agar beda dengan section atasnya */
-    padding: 6rem 0 8rem 0;
-    border-top: 1px solid var(--border-color);
-    overflow: hidden;
-    position: relative;
+  background-color: var(
+    --bg-card
+  ); /* Warna abu-abu sangat muda agar beda dengan section atasnya */
+  padding: 6rem 0 8rem 0;
+  border-top: 1px solid var(--border-color);
+  overflow: hidden;
+  position: relative;
 }
 
 .partners-header {
-    text-align: center;
-    margin-bottom: 4rem;
-    padding: 0 5%;
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 0 5%;
 }
 
 .partners-title {
-    font-size: clamp(2rem, 3vw, 2.8rem);
-    color: var(--text-main);
-    font-weight: 800;
-    margin-top: 1rem;
-    letter-spacing: -0.02em;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  color: var(--text-main);
+  font-weight: 800;
+  margin-top: 1rem;
+  letter-spacing: -0.02em;
 }
 
 .marquee-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 3.5rem; /* Jarak antar baris atas dan bawah */
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem; /* Jarak antar baris atas dan bawah */
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 /* FADE MASK: Efek menghilang halus di kiri & kanan layar */
 .marquee-fade {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 15%;
-    z-index: 2;
-    pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  z-index: 2;
+  pointer-events: none;
 }
 .fade-left {
-    left: 0;
-    background: linear-gradient(to right, var(--bg-card) 0%, transparent 100%);
+  left: 0;
+  background: linear-gradient(to right, var(--bg-card) 0%, transparent 100%);
 }
 .fade-right {
-    right: 0;
-    background: linear-gradient(to left, var(--bg-card) 0%, transparent 100%);
+  right: 0;
+  background: linear-gradient(to left, var(--bg-card) 0%, transparent 100%);
 }
 
 .marquee-track {
-    display: flex;
-    width: 100%;
-    overflow: hidden;
-    user-select: none;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
 }
 
 .marquee-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 5rem;
-    padding-right: 5rem; /* WAJIB SAMA DENGAN GAP AGAR LOOP MULUS */
-    flex-shrink: 0;
-    min-width: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 5rem;
+  padding-right: 5rem; /* WAJIB SAMA DENGAN GAP AGAR LOOP MULUS */
+  flex-shrink: 0;
+  min-width: max-content;
 }
 
 /* Animasi dihentikan saat kursor diarahkan ke area marquee */
 .marquee-container:hover .marquee-content {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
 
 /* Arah Animasi */
 .track-left .marquee-content {
-    animation: scrollLeft 40s linear infinite;
+  animation: scrollLeft 40s linear infinite;
 }
 .track-right .content-right {
-    animation: scrollRight 45s linear infinite; /* Sedikit lebih lambat dari baris 1 agar dinamis */
+  animation: scrollRight 45s linear infinite; /* Sedikit lebih lambat dari baris 1 agar dinamis */
 }
 
 /* STYLING LOGO KELAS ENTERPRISE */
 .marquee-content img {
-    height: 50px; /* Ukuran proporsional tidak terlalu raksasa */
-    width: auto;
-    max-width: 200px;
-    object-fit: contain;
-    
-    /* Rahasia Desain: Menghapus background putih JPG & menjadikannya abu-abu elegan */
-    mix-blend-mode: multiply; 
-    /* filter: grayscale(100%) opacity(0.5);  */
-    
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    cursor: pointer;
+  height: 50px; /* Ukuran proporsional tidak terlalu raksasa */
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+
+  /* Rahasia Desain: Menghapus background putih JPG & menjadikannya abu-abu elegan */
+  mix-blend-mode: multiply;
+  /* filter: grayscale(100%) opacity(0.5);  */
+
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
 }
 
 /* Efek menyala & berwarna kembali saat dihover */
 .marquee-content img:hover {
-    filter: grayscale(0%) opacity(1);
-    transform: scale(1.1);
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.1);
 }
 
 /* Keyframes Animasi Kiri & Kanan */
 @keyframes scrollLeft {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 @keyframes scrollRight {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(0); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 /* --- RESPONSIF --- */
 @media (max-width: 768px) {
-    .marquee-content img { height: 35px; max-width: 150px; }
-    .marquee-content { gap: 3rem; padding-right: 3rem; }
-    .marquee-container { gap: 2rem; }
-    .marquee-fade { width: 10%; }
+  .marquee-content img {
+    height: 35px;
+    max-width: 150px;
+  }
+  .marquee-content {
+    gap: 3rem;
+    padding-right: 3rem;
+  }
+  .marquee-container {
+    gap: 2rem;
+  }
+  .marquee-fade {
+    width: 10%;
+  }
 }
