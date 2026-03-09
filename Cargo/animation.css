@@ -1,0 +1,68 @@
+/* ==========================================
+   GLOBAL SCROLL REVEAL ANIMATIONS
+   ========================================== */
+/* 1. Base styling untuk elemen yang akan di-reveal saat di-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  will-change: opacity, transform;
+}
+
+/* 2. State saat elemen masuk ke viewport layar (Class ditambahkan oleh JS) */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3. Utility untuk urutan animasi (Staggered Delays) */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+
+/* ==========================================
+   INITIAL LOAD ANIMATIONS (NAVBAR & HERO)
+   ========================================== */
+/* 1. Navbar masuk dari atas */
+.light-nav {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: navFadeDown 0.8s ease forwards 0.2s;
+}
+
+@keyframes navFadeDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. Teks Hero masuk dari kanan */
+.hero-content-right {
+  opacity: 0;
+  transform: translateX(40px);
+  animation: heroTextFadeIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards 0.5s;
+}
+
+@keyframes heroTextFadeIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Penyesuaian Teks Hero untuk Mobile (masuk dari bawah agar lebih rapi) */
+@media (max-width: 990px) {
+  .hero-content-right {
+    transform: translateY(40px);
+    animation: heroTextFadeInMobile 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards 0.5s;
+  }
+  @keyframes heroTextFadeInMobile {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

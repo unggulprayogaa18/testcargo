@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RevAero - Cargo Delivery Systems</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="cargo.css">
+    <link rel="stylesheet" href="animation.css">
+
+</head>
+
+<body>
+
+    <nav class="light-nav">
+        <div class="logo">
+            <img src="/assets/foto/logo2.png" alt="RevAero Logo">
+        </div>
+
+        <div class="nav-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <div class="nav-links">
+            <a href="/index.html">Detect & Avoid</a>
+            <a href="/cargo.html" class="active">Cargo Delivery</a>
+            <a href="https://ag.revn.aero">Agriculture</a>
+        </div>
+
+        <button class="btn btn-primary desktop-only">Contact Engineering</button>
+    </nav>
+
+    <section class="cargo-hero">
+        <div class="layer-bg"></div>
+
+        <div class="layer-cloud " data-speed="0.2" style="background-image: url('/assets/foto/cloud.png');"></div>
+         
+        <!-- <div class="layer-cloud" data-speed="0.2">
+            <video autoplay loop muted playsinline class="cloud-video">
+                <source src="/assets/video/Permintaan_Animasi_Awan_Durasi_Lama.mp4" type="video/mp4">
+            </video>
+        </div> -->
+        <div class="layer-drone-wrapper " data-speed="0.6">
+            <div class="drone-anim-wrapper">
+                <img src="/assets/foto/image019.png " alt="RevAero Cargo Drone" class="drone-float">
+            </div>
+        </div>
+
+        <div class="hero-content-right reveal " data-speed="0.9">
+            <div class="pre-title">
+                <span class="line"></span> REVOLUTION AEROSPACE CARGO SERVICE
+            </div>
+            <h1>Middle & Last-Mile<br><span>Cargo Delivery</span></h1>
+            <p>End-to-end operational middle-mile and last-mile cargo delivery for payloads up to 55 kg, over
+                commercially viable ranges operating for up to 4 hours. Bridging the gap to remote communities
+                disadvantaged by absent infrastructure.</p>
+
+            <div class="hero-cta">
+                <button class="btn btn-primary">Explore Fleet</button>
+                <button class="btn btn-outline">Download Whitepaper</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="content-overlap">
+        <div class="cargo-marquee">
+            <div class="marquee-content">
+                <span>BEYOND VISUAL LINE OF SIGHT</span> <span class="star">★</span>
+                <span class="outline">RAPID DEPLOYMENT</span> <span class="star">★</span>
+                <span>HEAVY PAYLOAD</span> <span class="star">★</span>
+                <span class="outline">ZERO EMISSIONS</span> <span class="star">★</span>
+                <span>BEYOND VISUAL LINE OF SIGHT</span> <span class="star">★</span>
+                <span class="outline">RAPID DEPLOYMENT</span> <span class="star">★</span>
+                <span>HEAVY PAYLOAD</span> <span class="star">★</span>
+                <span class="outline">ZERO EMISSIONS</span> <span class="star">★</span>
+            </div>
+        </div>
+
+        <section class="partner-grid-section">
+            <div class="partner-grid-container reveal">
+                <div class="partner-box">Trusted by <br><strong>Mining Corp</strong></div>
+                <div class="partner-box">Partner of <br><strong>Gov Health</strong></div>
+                <div class="partner-box">Supported by <br><strong>Aus Grant</strong></div>
+                <div class="partner-box">Member of <br><strong>AeroSpace Alliance</strong></div>
+                <div class="partner-box">Certified by <br><strong>CASA</strong></div>
+            </div>
+        </section>
+
+
+
+        <section class="fleet-section">
+            <div class="flight-animation-bg">
+                <svg viewBox="0 0 1200 600" preserveAspectRatio="none" class="flight-svg">
+
+                    <path id="flight-route-main" d="M 1300 150 C 900 100, 800 350, 600 250 C 400 150, 300 400, -50 400"
+                        fill="none" stroke="var(--brand-orange)" stroke-width="2" stroke-dasharray="8,8"
+                        opacity="0.4" />
+
+                    <g id="airplane-main">
+                        <image href="/assets/foto/uav2.png" x="-32" y="-32" width="64" height="64"
+                            style="filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0));" />
+
+                        <animateMotion dur="12s" repeatCount="indefinite" rotate="auto">
+                            <mpath href="#flight-route-main" />
+                        </animateMotion>
+                    </g>
+
+                </svg>
+            </div>
+
+            <div class="section-header-modern reveal">
+                <span class="eyebrow">AIRCRAFT CAPABILITIES</span>
+                <h2>Our Cargo Fleet</h2>
+                <p>Engineered for versatility. From last-mile rapid deployment to heavy industrial lift, our uncrewed
+                    systems are built to perform in unique Australian landscapes.</p>
+            </div>
+
+            <div class="fleet-grid">
+                <div class="fleet-card reveal delay-100">
+                    <div class="card-image-wrapper">
+                        <div class="card-badge">VTOL</div>
+                        <img src="/assets/foto/image019.png" alt="Helios Drone">
+                    </div>
+                    <div class="card-content">
+                        <h3>Helios</h3>
+                        <p class="card-desc">Long endurance uncrewed VTOL platform made with full carbon fibre. Ready
+                            for take-off in 20 minutes.</p>
+                        <ul class="specs-list">
+                            <li><span>Max Payload</span> <strong>8 kg</strong></li>
+                            <li><span>Flight Time</span> <strong>4 hours</strong></li>
+                            <li><span>Max Speed</span> <strong>30 m/s</strong></li>
+                        </ul>
+                        <a href="#" class="card-link">View Details <span>→</span></a>
+                    </div>
+                </div>
+
+                <div class="fleet-card featured reveal delay-200">
+                    <div class="card-image-wrapper">
+                        <div class="card-badge highlight">HEAVY LIFT</div>
+                        <img src="/assets/foto/image095.png" alt="Centaurus Drone">
+                    </div>
+                    <div class="card-content">
+                        <h3>Centaurus</h3>
+                        <p class="card-desc">Medium-to-heavy lift aviation-grade platform. Made with full carbon fibre
+                            for uncompromised performance in harsh terrain and weather.</p>
+                        <ul class="specs-list">
+                            <li><span>Max Payload</span> <strong>30 kg</strong></li>
+                            <li><span>Flight Time</span> <strong>5 hours</strong></li>
+                            <li><span>Range</span> <strong>>100 km</strong></li>
+                        </ul>
+                        <a href="#" class="card-link">View Details <span>→</span></a>
+                    </div>
+                </div>
+
+                <div class="fleet-card reveal delay-300">
+                    <div class="card-image-wrapper">
+                        <div class="card-badge">FIXED WING</div>
+                        <img src="/assets/foto/image096.png" alt="Eurofox Aircraft">
+                    </div>
+                    <div class="card-content">
+                        <h3>Eurofox</h3>
+                        <p class="card-desc">Optionally piloted aircraft featuring a 4-cylinder Rotax engine with
+                            exceptional handling, payload, and performance.</p>
+                        <ul class="specs-list">
+                            <li><span>Max Payload</span> <strong>30 kg</strong></li>
+                            <li><span>Flight Time</span> <strong>2.5 - 5 hours</strong></li>
+                            <li><span>Cruise Speed</span> <strong>30 - 35 m/s</strong></li>
+                        </ul>
+                        <a href="#" class="card-link">View Details <span>→</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="metrics-transparent-section">
+            <div class="metrics-container">
+                <div class="metrics-header reveal">
+                    <span class="eyebrow">ABOUT RACS</span>
+                    <h2>What is RACS?</h2>
+                    <p>Backed by a $5.3M Australian government grant in 2022, RevAero is pioneering regional aerial
+                        logistics via our UTM to integrate crewed and uncrewed traffic. Inspired by the challenges of
+                        Australia's vast distances, RACS aims to connect remote communities at scale by transporting
+                        meaningful payloads—enhancing local business, life, and tourism</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-item reveal delay-100">
+                        <h3 class="metric-number">50<span class="text-orange">kg</span></h3>
+                        <p class="metric-label">Max Payload For Faster & Lower-Cost Distribution</p>
+                    </div>
+                    <div class="metric-item reveal delay-200">
+                        <h3 class="metric-number">New<span class="text-orange"></span></h3>
+                        <p class="metric-label">Delivery Options Where None Currently Exist</p>
+                    </div>
+                    <div class="metric-item reveal delay-300">
+                        <h3 class="metric-number">Rapid<span class="text-orange"></span></h3>
+                        <p class="metric-label">Distribution of Emergency Supplies & Humanitarian Aid</p>
+                    </div>
+                    <div class="metric-item reveal delay-400">
+                        <h3 class="metric-number">15.4<span class="text-orange">%</span></h3>
+                        <p class="metric-label">Less Road Risk (2021 Heavy Vehicle Deaths)*</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="big-statement-section">
+            <div class="statement-container reveal statement-anim">
+                <span class="eyebrow statement-eyebrow">THE FUTURE OF FREIGHT</span>
+                <h2 class="massive-text">
+                    <span class="text-line line-1">WE DON'T JUST FLY.</span><br>
+                    <span class="text-line line-2">WE <span class="text-orange">DELIVER</span></span>
+                    <span class="text-line line-3 outline-text">IMPACT.</span>
+                </h2>
+            </div>
+        </section>
+
+        <section class="why-us-scrolly" id="why-us-scrolly">
+            <div class="why-us-sticky">
+
+                <div class="why-us-container phase-1 active">
+                    <div class="why-us-image ">
+                        <img src="/assets/foto/image100.png"
+                            alt="RevAero mobile ground control station for cargo service">
+                        <div class="orange-accent-box"></div>
+                    </div>
+
+                    <div class="why-us-content  delay-100">
+                        <span class="eyebrow" style="color: #fff;">OUR SERVICES <span
+                                style="display:inline-block; width: 40px; height: 1px; background: var(--brand-orange); margin-left: 10px; vertical-align: middle;"></span></span>
+                        <h2>REVOLUTION AEROSPACE CARGO SERVICE</h2>
+                        <p class="desc">A transformative leap forward in logistics. Our RACS services surpass
+                            traditional transport methods by navigating directly to specific destinations, providing
+                            rapid response and swift humanitarian aid delivery to isolated communities across the unique
+                            Australian landscape.
+                        </p>
+
+                        <div class="why-features">
+                            <div class="why-feature">
+                                <div class="icon-outline">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <div class="text">
+                                    <h4>RAPID & DIRECT DELIVERY</h4>
+                                    <p>Navigates directly to destinations, eliminating intermediate hubs for faster
+                                        delivery in time-sensitive and emergency scenarios.</p>
+                                </div>
+                            </div>
+
+                            <div class="why-feature">
+                                <div class="icon-outline">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                    </svg>
+                                </div>
+                                <div class="text">
+                                    <h4>VTOL AGILITY</h4>
+                                    <p>Vertical takeoff and landing capabilities adapt to challenging terrains and
+                                        remote locations without the need for extensive infrastructure.</p>
+                                </div>
+                            </div>
+
+                            <div class="why-feature">
+                                <div class="icon-outline">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <div class="text">
+                                    <h4>COST-EFFECTIVE EFFICIENCY</h4>
+                                    <p>Lower operating costs, reduced fuel consumption, and easily programmable flight
+                                        paths make it a superior solution for frequent missions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="why-us-container phase-2">
+                    <div class="why-us-content">
+                        <span class="eyebrow" style="color: #fff;">OUR COMMITMENT <span
+                                style="display:inline-block; width: 40px; height: 1px; background: var(--brand-orange); margin-left: 10px; vertical-align: middle;"></span></span>
+                        <h2>MORE THAN JUST CARGO DELIVERY</h2>
+                        <p class="desc">RevAero’s RACS incorporates our in-house designed and developed Detect and Avoid
+                            (DAA) and UAS Traffic Management (UTM) systems, along with our broader fleet of UAS to
+                            provide an end-to-end operational middle-mile and last-mile cargo delivery for payloads up
+                            to 55 kg, over commercially viable ranges operating for up to 4 hours.
+                        </p>
+
+                        <div class="why-features">
+                            <div class="why-feature">
+                                <div class="icon-outline">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                    </svg>
+                                </div>
+                                <div class="text">
+                                    <h4>BRIDGING THE INFRASTRUCTURE GAP</h4>
+                                    <p>Delivering into remote areas, bridging the gap for sites disadvantaged by absent
+                                        infrastructure. Deployable across the Asia-Pacific as a permanent logistics
+                                        solution or an urgent response to Humanitarian Aid / Disaster Recovery (HADR)
+                                        scenarios.</p>
+                                </div>
+                            </div>
+
+                            <div class="why-feature">
+                                <div class="icon-outline">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <div class="text">
+                                    <h4>HARSH ENVIRONMENT CAPABLE</h4>
+                                    <p>Our flagship aircraft is capable of operating in harsh weather conditions,
+                                        carrying a significant payload with applications in military logistics,
+                                        humanitarian assistance, and disaster relief scenarios.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="why-us-image phase-2-img">
+                        <img src="/assets/foto/image074.jpg" alt="RevAero Rapid Deployment">
+                        <div class="orange-accent-box"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="partner-scrolly" id="partner-scrolly">
+            <div class="partner-sticky">
+
+                <div class="bg-phase bg-phase-1 active" style="background-image: url('/assets/foto/team2.jpg');"></div>
+                <div class="bg-phase bg-phase-2" style="background-image: url('/assets/foto/image042.png');"></div>
+                <div class="cta-overlay-sticky"></div>
+
+                <div class="partner-content-stack">
+
+                    <div class="partner-container p-phase-1 active">
+                        <div class="cta-content">
+                            <div class="cta-header">
+                                <span class="line"></span> <span class="eyebrow-cta">PARTNER WITH US</span>
+                            </div>
+                            <h2>INTEGRATE AUTONOMOUS<br>CARGO TODAY</h2>
+                            <p>Eliminate the need for intermediate hubs and extensive ground infrastructure. Connect
+                                with our engineering team to revolutionize your middle-mile logistics.</p>
+                            <button class="btn btn-red-cta">SCHEDULE A CONSULTATION</button>
+                        </div>
+                    </div>
+
+                    <div class="partner-container p-phase-2">
+                        <div class="cta-content right-aligned">
+                            <div class="cta-header">
+                                <span class="eyebrow-cta">CUSTOM ENGINEERING</span> <span class="line"></span>
+                            </div>
+                            <h2>CERTIFIED & SCALABLE<br>OPERATIONS</h2>
+                            <p>Beyond hardware, we deliver comprehensive integration support. From rigorous Test &
+                                Evaluation to navigating complex regulatory frameworks, our experts ensure your
+                                autonomous fleet is fully certified, safe, and mission-ready.</p>
+                            <button class="btn btn-red-cta">SPEAK TO OUR EXPERTS</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="impact-section">
+            <div class="impact-container">
+                <div class="impact-text reveal">
+                    <span class="eyebrow">STRATEGIC ADVANTAGES</span>
+                    <h2>Empowering Next-Gen Supply Chains</h2>
+                    <p>By integrating autonomous aerial networks, we unlock entirely new operational models for our
+                        partners. We focus on securing sensitive cargo and maximizing human capital, ensuring your
+                        logistics are not just faster, but fundamentally smarter.</p>
+
+                    <div class="impact-features">
+                        <div class="feature reveal delay-100">
+                            <div class="feature-icon">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Time-Critical & Cold-Chain Integrity</h4>
+                                <p>For medical supplies, lab samples, and perishables, time is the enemy. Our
+                                    direct-to-site flight paths bypass ground congestion, ensuring time-sensitive assets
+                                    arrive rapidly before degradation occurs.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature reveal delay-200">
+                            <div class="feature-icon">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Autonomous Fleet Scalability</h4>
+                                <p>Transitioning to advanced UAS Traffic Management allows a single operator to oversee
+                                    multiple autonomous missions. This acts as a force-multiplier, enabling your
+                                    business to scale operations without linearly increasing human resource costs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="impact-visuals reveal delay-300"
+                    style="background: #09090b; border: 1px solid rgba(255,255,255,0.05);">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="img-main"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                        <defs>
+                            <pattern id="tech-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.05)"
+                                    stroke-width="1" />
+                            </pattern>
+                            <linearGradient id="glowOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="var(--brand-orange)" stop-opacity="0.8" />
+                                <stop offset="100%" stop-color="var(--brand-orange)" stop-opacity="0.0" />
+                            </linearGradient>
+                        </defs>
+
+                        <rect width="100%" height="100%" fill="url(#tech-grid)" />
+
+                        <g fill="none" stroke="var(--brand-orange)" stroke-width="3" stroke-dasharray="10 15">
+                            <path d="M400,300 Q600,100 700,200" opacity="0.8">
+                                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="3s"
+                                    repeatCount="indefinite" />
+                            </path>
+                            <path d="M400,300 Q200,150 150,250" opacity="0.5">
+                                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="4s"
+                                    repeatCount="indefinite" />
+                            </path>
+                            <path d="M400,300 Q300,500 150,450" opacity="0.7">
+                                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2.5s"
+                                    repeatCount="indefinite" />
+                            </path>
+                            <path d="M400,300 Q550,450 650,400" opacity="0.4">
+                                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="5s"
+                                    repeatCount="indefinite" />
+                            </path>
+                        </g>
+
+                        <circle cx="400" cy="300" r="45" fill="url(#glowOrange)" />
+                        <circle cx="400" cy="300" r="12" fill="var(--brand-orange)" />
+                        <circle cx="400" cy="300" r="60" fill="none" stroke="var(--brand-orange)" stroke-width="2"
+                            opacity="0.6">
+                            <animate attributeName="r" from="40" to="120" dur="2s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" from="0.6" to="0" dur="2s" repeatCount="indefinite" />
+                        </circle>
+
+                        <g fill="#ffffff">
+                            <circle cx="700" cy="200" r="8" />
+                            <circle cx="150" cy="250" r="6" />
+                            <circle cx="150" cy="450" r="9" />
+                            <circle cx="650" cy="400" r="7" />
+                        </g>
+
+                        <path d="M400,300 L400,265" stroke="#ffffff" stroke-width="4" stroke-linecap="round">
+                            <animateTransform attributeName="transform" type="rotate" from="0 400 300" to="360 400 300"
+                                dur="4s" repeatCount="indefinite" />
+                        </path>
+                    </svg>
+
+                    <div class="floating-stat-box" style="z-index: 10;">
+                        <span class="stat-number">1:M<small></small></span>
+                        <span class="stat-label">Operator-to-Fleet Ratio</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="parallax-separator" style="background-image: url('/assets/foto/image092.png'); ">
+            <div class="parallax-overlay-light"></div>
+            <div class="parallax-content text-center reveal">
+                <span class="eyebrow" style="color: var(--brand-orange);">More Than Just Cargo</span>
+                <h2 style="color: #fff; margin-bottom: 1.5rem; font-size: clamp(2rem, 4vw, 3.5rem);">An End-to-End
+                    <br>Logistics Chain
+                </h2>
+                <p style="color: #e4e4e7; font-size: 1.15rem; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                    RevAero's RACS incorporates our in-house designed and developed Detect and Avoid (DAA) and UAS
+                    Traffic Management (UTM) systems, to provide an end-to-end operational middle-mile and last-mile
+                    cargo delivery safely integrating with traditional air traffic.
+                </p>
+            </div>
+        </section>
+
+        <section class="tech-specs-section">
+            <div class="flight-animation-bg">
+                <svg viewBox="0 0 1200 600" preserveAspectRatio="none" class="flight-svg">
+                    <path id="flight-route-specs"
+                        d="M -100 50 C 200 100, 400 500, 600 300 C 800 100, 1000 500, 1300 550" fill="none"
+                        stroke="var(--brand-orange)" stroke-width="2" stroke-dasharray="8,8" opacity="0.3" />
+
+                    <g id="airplane-specs">
+                        <image href="/assets/foto/uav3.png" x="-32" y="-32" width="64" height="64"
+                            style="filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0));" />
+
+                        <animateMotion dur="15s" repeatCount="indefinite" rotate="auto">
+                            <mpath href="#flight-route-specs" />
+                        </animateMotion>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="specs-container">
+                <div class="section-header-modern reveal">
+                    <h2>Technical Specifications</h2>
+                    <p>Compare our platforms to find the right fit for your cargo needs.</p>
+                </div>
+
+                <div class="table-responsive reveal delay-100">
+                    <table class="modern-specs-table">
+                        <thead>
+                            <tr>
+                                <th>FEATURES</th>
+                                <th>Helios</th>
+                                <th class="highlight-col">Centaurus</th>
+                                <th>Eurofox</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="feature-name">Platform Type</td>
+                                <td>Long Endurance VTOL</td>
+                                <td class="highlight-col">Heavy Lift Aviation-Grade</td>
+                                <td>Optionally Piloted Fixed Wing</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Max Payload</td>
+                                <td>8 kg</td>
+                                <td class="highlight-col">30 kg</td>
+                                <td>30 kg</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Flight Time</td>
+                                <td>4 hours</td>
+                                <td class="highlight-col">5 hours</td>
+                                <td>2.5 - 5 hours</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Maximum Airspeed</td>
+                                <td>30 m/s</td>
+                                <td class="highlight-col">Optimal for range >100 km</td>
+                                <td>40 m/s (Cruise: 30-35 m/s)</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Build Material</td>
+                                <td>Full Carbon Fibre</td>
+                                <td class="highlight-col">Full Carbon Fibre</td>
+                                <td>Aviation Standard</td>
+                            </tr>
+                            <tr class="action-row">
+                                <td></td>
+                                <td><a href="#" class="table-link">View Sheet</a></td>
+                                <td class="highlight-col"><a href="#" class="table-link">View Sheet</a></td>
+                                <td><a href="#" class="table-link">View Sheet</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="crm-integration-section">
+            <div class="crm-container">
+                <div class="crm-text reveal">
+                    <span class="eyebrow">ENTERPRISE INTEGRATION</span>
+                    <h2>Seamless CRM & ERP Connectivity</h2>
+                    <p>Plug RevAero's UAS Traffic Management (UTM) and fleet telemetry directly into your existing
+                        enterprise software. Track payloads, automate dispatch, and generate compliance reports without
+                        ever leaving your native environment.</p>
+
+                    <ul class="crm-features-list">
+                        <li>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>Real-time API Webhooks:</strong> Live flight tracking and payload
+                                status.</span>
+                        </li>
+                        <li>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>Automated Dispatch:</strong> Trigger flights automatically from your
+                                CRM.</span>
+                        </li>
+                        <li>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>Data Security:</strong> End-to-end encryption for sensitive medical/military
+                                data.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="crm-form-card reveal delay-200">
+                    <div class="form-header">
+                        <h3>Request API Access</h3>
+                        <p>Talk to our integration specialists today.</p>
+                    </div>
+                    <form action="#" class="modern-crm-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="workEmail">Work Email</label>
+                            <input type="email" id="workEmail" placeholder="john@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="systemSelect">Current CRM / ERP System</label>
+                            <div class="select-wrapper">
+                                <select id="systemSelect" required>
+                                    <option value="" disabled selected>Select your platform...</option>
+                                    <option value="salesforce">Salesforce</option>
+                                    <option value="sap">SAP / Oracle</option>
+                                    <option value="hubspot">HubSpot</option>
+                                    <option value="custom">Custom Internal API</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit-crm">Get Integration Guide</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <div class="brand-ribbon-section">
+            <div class="brand-ribbon-wrapper">
+
+                <div class="brand-ribbon-content">
+                    <div class="brand-item">
+                        <img src="/assets/foto/logo.png" alt="RevAero">
+                        <span class="brand-loc">AUSTRALIA</span>
+                    </div>
+                    <div class="brand-separator">★</div>
+
+                    <div class="brand-item">
+                        <img src="/assets/foto/logo.png" alt="RevAero">
+                        <span class="brand-loc">AUSTRALIA</span>
+                    </div>
+                    <div class="brand-separator">★</div>
+
+                    <div class="brand-item">
+                        <img src="/assets/foto/logo.png" alt="RevAero">
+                        <span class="brand-loc">AUSTRALIA</span>
+                    </div>
+                    <div class="brand-separator">★</div>
+
+                    <div class="brand-item">
+                        <img src="/assets/foto/logo.png" alt="RevAero">
+                        <span class="brand-loc">AUSTRALIA</span>
+                    </div>
+                    <div class="brand-separator">★</div>
+                </div>
+
+                <div class="brand-ribbon-content" aria-hidden="true">
+                    <div class="brand-item">
+                        <img src="/assets/foto/logo.png" alt="RevAero">
+                        <span class="brand-loc">AUSTRALIA</span>
+                    </div>
+                    <div class="brand-separator">★</div>
+
+                    <div class="brand-item">
+                        <img src="/assets/foto/logo.png" alt="RevAero">
+                        <span class="brand-loc">AUSTRALIA</span>
+                    </div>
+                    <div class="brand-separator">★</div>
+
+                    <div class="brand-item">
+                        <img src="/assets/foto/logo.png" alt="RevAero">
+                        <span class="brand-loc">AUSTRALIA</span>
+                    </div>
+                    <div class="brand-separator">★</div>
+
+                    <div class="brand-item">
+                        <img src="/assets/foto/logo.png" alt="RevAero">
+                        <span class="brand-loc">AUSTRALIA</span>
+                    </div>
+                    <div class="brand-separator">★</div>
+                </div>
+
+            </div>
+        </div>
+
+        <section class="cargo-cta-light">
+            <div class="cta-light-container reveal">
+                
+                <div class="cta-orange-card">
+                    
+                    <div class="cta-text-content">
+                        <h2>Ready to upgrade<br>your supply chain?</h2>
+                        <p>Connect with our engineering team to discover how RevAero's autonomous fleets can be integrated into your regional logistics network.</p>
+                        <div class="cta-actions">
+                            <button class="btn btn-white">Request a Meeting</button>
+                            <button class="btn btn-outline-white">Download Technical Specs</button>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-visual-cards">
+                        <div class="photo-card card-1">
+                            <img src="/assets/foto/fto (2).png" alt="UAS Deployment">
+                        </div>
+                        <div class="photo-card card-2">
+                            <img src="/assets/foto/fto (1).png" alt="Cargo Drone Delivery">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+<section class="trusted-partners-section">
+            <div class="partners-header reveal">
+                <span class="eyebrow" style="color: var(--brand-orange); font-weight: 700; letter-spacing: 2px;">OUR ECOSYSTEM</span>
+                <h3 class="partners-title">Trusted by global leaders in aviation and defence</h3>
+            </div>
+
+            <div class="marquee-container">
+                <div class="marquee-fade fade-left"></div>
+                <div class="marquee-fade fade-right"></div>
+
+                <div class="marquee-track track-left">
+                    <div class="marquee-content">
+                        <img src="/assets/foto/mitra/image044.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image045.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image046.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image047.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image048.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image049.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image050.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image051.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image052.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image053.jpg" alt="Partner">
+                    </div>
+                    <div class="marquee-content" aria-hidden="true">
+                        <img src="/assets/foto/mitra/image044.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image045.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image046.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image047.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image048.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image049.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image050.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image051.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image052.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image053.jpg" alt="Partner">
+                    </div>
+                </div>
+
+                <div class="marquee-track track-right">
+                    <div class="marquee-content content-right">
+                        <img src="/assets/foto/mitra/image054.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image055.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image056.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image057.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image058.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image059.png" alt="Partner">
+                        <img src="/assets/foto/mitra/image060.png" alt="Partner">
+                        <img src="/assets/foto/mitra/image061.png" alt="Partner">
+                        <img src="/assets/foto/mitra/image062.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image063.png" alt="Partner">
+                    </div>
+                    <div class="marquee-content content-right" aria-hidden="true">
+                        <img src="/assets/foto/mitra/image054.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image055.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image056.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image057.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image058.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image059.png" alt="Partner">
+                        <img src="/assets/foto/mitra/image060.png" alt="Partner">
+                        <img src="/assets/foto/mitra/image061.png" alt="Partner">
+                        <img src="/assets/foto/mitra/image062.jpg" alt="Partner">
+                        <img src="/assets/foto/mitra/image063.png" alt="Partner">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <footer class="light-footer">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="/assets/foto/logo2.png" alt="RevAero" style="width: 120px; ">
+                    <p>Excellence in Autonomy. Providing advanced R&D and mission-enabling payloads for Uncrewed Aerial
+                        Systems.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#">Detect & Avoid</a></li>
+                        <li><a href="#">Cargo Systems</a></li>
+                        <li><a href="#">UTM Integration</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Revolution Aerospace. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,2404 @@
+/* --- ROOT VARIABLES (LIGHT THEME) --- */
+:root {
+  --bg-light: #ffffff;
+  --bg-card: #f8f9fa; /* Abu-abu sangat muda untuk card */
+  --border-color: rgba(0, 0, 0, 0.1); /* Border gelap transparan */
+  --brand-orange: #ff5e00;
+  --text-main: #09090b; /* Hitam pekat untuk teks utama */
+  --text-muted: #52525b; /* Abu-abu gelap untuk teks pendukung */
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* --- LIGHT NAVIGATION --- */
+.light-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  z-index: 100;
+  /* Opsional: background putih transparan dengan blur */
+  /* background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px); */
+  /* border-bottom: 1px solid var(--border-color); */
+}
+
+.logo img {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+}
+
+.nav-links a {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  color: var(--brand-orange);
+}
+
+/* --- BUTTONS --- */
+.btn {
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-family: "Inter", sans-serif;
+}
+
+.btn-primary {
+  background-color: var(--brand-orange);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(255, 94, 0, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: #e65500;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 94, 0, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  border-color: var(--text-main);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* --- CARGO HERO SECTION --- */
+.cargo-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 5%;
+  overflow: hidden;
+  /* UBAH BAGIAN INI: */
+  background-color: transparent;
+}
+
+/* LAYER 1: Cloud Background */
+.layer-cloud {
+  /* UBAH DARI absolute MENJADI fixed: */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Lebar penuh layar */
+  height: 100vh; /* Tinggi penuh layar */
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  /* UBAH Z-INDEX KE -1 AGAR BERADA DI PALING BELAKANG: */
+  z-index: -1;
+  opacity: 0.85;
+  /* TAMBAHKAN INI agar awan tidak menghalangi klik ke tombol/link: */
+  pointer-events: none;
+}
+
+.cloud-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 60%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  z-index: 2;
+}
+
+/* LAYER 2: Drone/Aircraft */
+.layer-drone-wrapper {
+  position: absolute;
+  left: -5%;
+  top: 50%;
+  width: 55%; /* Sesuaikan besaran drone di sini */
+  max-width: 900px;
+  z-index: 3;
+  /* Animasi masuk dari luar layar (kiri bawah ke tengah) */
+  animation: flyIn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.drone-float {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.15));
+  /* Animasi melayang setelah pesawat masuk layar */
+  animation: floatDrone 4s ease-in-out infinite;
+}
+
+/* LAYER 3: Content Text (Kanan) */
+.hero-content-right {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  max-width: 550px; /* Batasi lebar teks agar rapi di kanan */
+  text-align: left;
+}
+
+.pre-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--brand-orange);
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.pre-title .line {
+  width: 40px;
+  height: 2px;
+  background-color: var(--brand-orange);
+}
+
+.hero-content-right h1 {
+  font-size: clamp(3.5rem, 5vw, 5rem);
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+}
+
+.hero-content-right h1 span {
+  color: var(--text-muted); /* Atau bisa gunakan var(--brand-orange) */
+}
+
+.hero-content-right p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+}
+
+/* --- KEYFRAME ANIMATIONS --- */
+
+@keyframes flyIn {
+  0% {
+    transform: translate(-40vw, 30vh) scale(0.8) rotate(-5deg);
+    opacity: 0;
+  }
+  100% {
+    /* Tetap di posisi vertikal tengah dengan translateY */
+    transform: translate(0, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes floatDrone {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 1024px) {
+  .layer-drone-wrapper {
+    width: 65%;
+    left: -10%;
+  }
+}
+
+/* --- KEYFRAME ANIMATIONS --- */
+
+@keyframes flyIn {
+  0% {
+    transform: translate(-40vw, 30vh) scale(0.8) rotate(-5deg);
+    opacity: 0;
+  }
+  100% {
+    /* Tetap di posisi vertikal tengah untuk Desktop */
+    transform: translate(0, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes floatDrone {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 990px) {
+  /* 1. Ubah tinggi hero agar menyesuaikan konten dan tidak menumpuk */
+  .cargo-hero {
+    flex-direction: column;
+    justify-content: center; /* Ubah ke center agar rata tengah vertikal */
+    padding-bottom: 3rem;
+    padding-top: 120px; /* Tambahkan jarak aman dari navbar */
+    height: auto;
+    min-height: 100vh;
+  }
+
+  /* 2. Ubah gradient agar tetap terbaca */
+  .cloud-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.7) 40%,
+      rgba(255, 255, 255, 1) 85%
+    );
+  }
+
+  /* 3. Kunci posisi drone di sini! Ubah dari absolute ke relative */
+  .layer-drone-wrapper {
+    position: relative;
+    width: 90%;
+    max-width: 400px; /* Batasi maksimal besaran drone di HP */
+    left: 0;
+    top: 0;
+    margin: 0 auto 2rem auto; /* Beri jarak (margin) bawah agar tidak menabrak teks */
+    animation: flyInMobile 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  /* 4. Pastikan teks mengambil ruang sisanya */
+  .hero-content-right {
+    position: relative;
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
+    z-index: 5;
+  }
+
+  .pre-title {
+    justify-content: center;
+    font-size: 0.75rem;
+  }
+
+  .hero-content-right h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-content-right p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    padding: 0 10px;
+  }
+
+  .hero-cta {
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Animasi khusus mobile (menghilangkan translate -50% agar tidak loncat ke atas) */
+@keyframes flyInMobile {
+  0% {
+    transform: translate(-20vw, 20vh) scale(0.7) rotate(-5deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* =========================================
+   AEROSPACE / RADIAN STYLE SECTIONS
+   ========================================= */
+
+/* --- TYPOGRAPHY & UTILITIES --- */
+.eyebrow {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--brand-orange);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.section-header-modern {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 4rem;
+}
+
+.section-header-modern h2 {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+.section-header-modern p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* --- FLEET SECTION --- */
+.fleet-section {
+  position: relative; /* PENTING: Ditambahkan agar background animasi terkurung di section ini */
+  padding: 8rem 5%;
+  background-color: var(--bg-light);
+  overflow: hidden; /* Mencegah pesawat melebar keluar batas halaman */
+}
+
+/* ==========================================
+   FLIGHT PATH ANIMATION (BACKGROUND)
+   ========================================== */
+.flight-animation-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Letakkan di paling belakang */
+  pointer-events: none; /* Agar garis/pesawat tidak menghalangi klik ke kartu drone */
+}
+
+.flight-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* PENTING: Pastikan teks header dan kartu drone ada di atas animasi (z-index lebih tinggi) */
+.section-header-modern,
+.fleet-grid {
+  position: relative;
+  z-index: 2;
+}
+
+.fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.fleet-card {
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.fleet-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+  border-color: rgba(255, 94, 0, 0.3);
+}
+
+.card-image-wrapper {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+  background-color: var(--bg-card);
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.fleet-card:hover .card-image-wrapper img {
+  transform: scale(1.05);
+}
+
+.card-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-main);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+.card-badge.highlight {
+  background: var(--brand-orange);
+  color: #fff;
+}
+
+.card-content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.specs-list {
+  list-style: none;
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.specs-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.specs-list li span {
+  color: var(--text-muted);
+}
+
+.specs-list li strong {
+  color: var(--text-main);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.card-link {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  color: var(--brand-orange);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: gap 0.3s ease;
+}
+
+.fleet-card:hover .card-link {
+  gap: 0.8rem;
+}
+
+/* --- IMPACT SECTION --- */
+.impact-section {
+  padding: 6rem 5%;
+  background-color: var(--bg-card); /* Sedikit abu-abu kontras */
+  border-top: 1px solid var(--border-color);
+}
+
+.impact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.impact-text h2 {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin-bottom: 1.5rem;
+}
+
+.impact-text > p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  line-height: 1.7;
+}
+
+.impact-features {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.feature {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 94, 0, 0.1);
+  color: var(--brand-orange);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.feature h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.feature p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.impact-visuals {
+  position: relative;
+  height: 600px;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.impact-visuals .img-main {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.floating-stat-box {
+  position: absolute;
+  bottom: 2rem;
+  left: -2rem; /* Agak keluar batas untuk efek dimensi */
+  background: var(--bg-light);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+}
+
+.stat-number {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--brand-orange);
+  line-height: 1;
+}
+
+.stat-number small {
+  font-size: 1.2rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+
+/* --- CTA SECTION --- */
+.cargo-cta-section {
+  padding: 6rem 5%;
+  background-color: var(--bg-light);
+}
+
+.cta-box {
+  background: var(--brand-orange);
+  background: linear-gradient(135deg, #ff7a2e 0%, var(--brand-orange) 100%);
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 24px;
+  padding: 5rem 3rem;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 20px 40px rgba(255, 94, 0, 0.2);
+}
+
+.cta-box h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.cta-box p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  opacity: 0.9;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* --- LIGHT FOOTER --- */
+.light-footer {
+  /* background-color: var(--bg-light); */
+  border-top: 1px solid var(--border-color);
+  padding: 5rem 5% 2rem;
+}
+
+.light-footer .footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+}
+
+.light-footer .footer-brand p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  max-width: 300px;
+}
+
+.light-footer .footer-col h4 {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+}
+
+.light-footer .footer-col ul {
+  list-style: none;
+}
+
+.light-footer .footer-col ul li {
+  margin-bottom: 0.8rem;
+}
+
+.light-footer .footer-col ul li a {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.light-footer .footer-col ul li a:hover {
+  color: var(--brand-orange);
+}
+
+.light-footer .footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.light-footer .footer-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.light-footer .footer-links a {
+  color: var(--text-muted);
+}
+
+.light-footer .footer-links a:hover {
+  color: var(--brand-orange);
+}
+
+/* --- RESPONSIVE ADJUSTMENTS (FOR NEW SECTIONS) --- */
+@media (max-width: 992px) {
+  .fleet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .impact-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .floating-stat-box {
+    left: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .fleet-grid {
+    grid-template-columns: 1fr;
+  }
+  .impact-visuals {
+    height: 400px;
+  }
+  .cta-buttons {
+    flex-direction: column;
+  }
+  .light-footer .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .light-footer .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+/* --- TECHNICAL SPECIFICATIONS TABLE --- */
+.tech-specs-section {
+  padding: 6rem 5%;
+  background-color: var(--bg-light);
+}
+
+.specs-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--bg-light);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+}
+
+.modern-specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 700px; /* Mencegah tabel terlalu menyusut di HP */
+}
+
+.modern-specs-table th {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  padding: 1.5rem 1rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.modern-specs-table th:first-child {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  width: 25%;
+}
+
+.modern-specs-table th.highlight-col {
+  color: var(--brand-orange);
+}
+
+.modern-specs-table td {
+  padding: 1.5rem 1rem;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  vertical-align: middle;
+}
+
+.modern-specs-table td.feature-name {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.modern-specs-table tr:last-child td {
+  border-bottom: none;
+}
+
+.modern-specs-table .highlight-col {
+  background-color: rgba(255, 94, 0, 0.02);
+}
+
+.table-link {
+  color: var(--brand-orange);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s ease;
+}
+
+.table-link:hover {
+  opacity: 0.7;
+}
+
+/* Responsif untuk tabel di HP */
+@media (max-width: 768px) {
+  .table-responsive {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  .modern-specs-table th,
+  .modern-specs-table td {
+    padding: 1rem 0.5rem;
+  }
+}
+
+.untuk-parralax {
+  height: 100vh;
+  width: 100%;
+  background-color: transparent; /* Membuatnya benar-benar transparan */
+  pointer-events: none; /* Opsional: Tambahkan ini agar tidak memblokir klik/kursor pada elemen di bawahnya */
+}
+/* ==========================================
+   PARALLAX SEPARATOR SECTION
+   ========================================== */
+
+.parallax-separator {
+  position: relative;
+  width: 100%;
+  height: 60vh; /* Mengambil 60% tinggi layar */
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Kunci untuk efek parallax murni CSS: */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.parallax-overlay-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Overlay gelap transparan agar teks putih di atasnya terbaca jelas */
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+/* --- UTILITY: TEXT CENTER --- */
+.text-center {
+  text-align: center;
+  width: 100%;
+}
+
+.parallax-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 5%;
+  /* Tambahan untuk memastikan konten di tengah secara vertikal & horizontal */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsif untuk layar HP (iOS kadang kurang support fixed attachment, jadi kita buat scroll normal atau sesuaikan ukurannya) */
+@media (max-width: 768px) {
+  .parallax-separator {
+    background-attachment: scroll; /* Opsional: mematikan efek parallax di mobile agar lebih ringan/bebas bug di Safari iOS */
+    height: auto;
+    padding: 6rem 0;
+  }
+} /* --- NAVBAR RESPONSIVE & MOBILE MENU --- */
+
+/* Ikon Hamburger bawaan (Sembunyikan di Desktop) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.nav-toggle .bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-main);
+  transition: all 0.3s ease;
+  border-radius: 3px;
+}
+
+/* Sembunyikan tombol mobile di desktop */
+.mobile-only {
+  display: none;
+}
+
+/* --- MEDIA QUERIES UNTUK NAVBAR HP (< 768px) --- */
+@media (max-width: 768px) {
+  /* Sembunyikan tombol desktop */
+  .desktop-only {
+    display: none;
+  }
+
+  /* Tampilkan ikon hamburger */
+  .nav-toggle {
+    display: flex;
+  }
+
+  /* Tampilkan tombol versi mobile di dalam menu */
+  .mobile-only {
+    display: block;
+    margin-top: 1rem;
+    width: 80%;
+  }
+
+  /* Ubah Nav-Links menjadi menu Dropdown vertikal */
+  .nav-links {
+    position: absolute;
+    top: 90px; /* Sesuai dengan tinggi navbar */
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-light);
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--border-color);
+
+    /* Efek animasi tersembunyi (geser ke atas) */
+    transform: translateY(-150%);
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    z-index: 99;
+  }
+
+  /* Saat menu aktif (diklik dari JavaScript) */
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Animasi Ikon Hamburger menjadi tanda Silang (X) */
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+/* ==========================================
+   MARQUEE BANNER (aga.PNG style)
+   ========================================== */
+.cargo-marquee {
+  /* Menggunakan gradien dari atas (transparan) ke bawah (warna) */
+  background: linear-gradient(to bottom, transparent 0%, #f4f4f5 100%);
+  padding: 1.5rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+}
+.marquee-content {
+  display: inline-block;
+  animation: scrollMarquee 25s linear infinite;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.marquee-content span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.marquee-content .outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--text-muted);
+}
+
+.marquee-content .star {
+  color: var(
+    --brand-orange
+  ); /* Menggunakan orange alih-alih merah agar senada brand */
+  font-size: 2rem;
+  margin: 0 2rem;
+}
+
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  } /* Pastikan teks diulang di HTML agar looping mulus */
+}
+
+/* ==========================================
+   PARTNER GRID (Capture3.jpg style)
+   ========================================== */
+.partner-grid-section {
+  padding: 2rem 5%;
+  background-color: var(--bg-light);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.partner-grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.partner-box {
+  flex: 1;
+  min-width: 150px;
+  height: 100px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.partner-box strong {
+  color: var(--text-main);
+  font-size: 1.1rem;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.partner-box:hover {
+  border-color: var(--brand-orange);
+  background-color: rgba(255, 94, 0, 0.02);
+}
+
+/* ==========================================
+   WHY US SCROLLYTELLING SECTION (FULL CSS)
+   ========================================== */
+.why-us-scrolly {
+  background-color: #09090b; /* Latar hitam pekat */
+  color: #ffffff;
+  height: 200vh; /* Memberi ruang scroll untuk 2 fase */
+  position: relative;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+.why-us-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden; /* Mencegah scroll horizontal saat elemen masuk */
+  width: 100%;
+}
+
+.why-us-container {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 0 5%;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.why-us-container.active {
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 5;
+}
+
+/* --- ANIMASI SLIDE IN / SLIDE OUT --- */
+
+/* FASE 1: Saat tidak aktif (menunggu di luar layar) */
+.phase-1 .why-us-image {
+  opacity: 0;
+  transform: translateX(-150px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.phase-1 .why-us-content {
+  opacity: 0;
+  transform: translateX(150px);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) 0.1s;
+}
+
+/* FASE 2: Saat tidak aktif (menunggu di luar layar) */
+.phase-2 .why-us-content {
+  opacity: 0;
+  transform: translateX(-150px);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.phase-2 .why-us-image {
+  opacity: 0;
+  transform: translateX(150px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) 0.1s;
+}
+
+/* KETIKA FASE MENJADI AKTIF (Masuk ke tengah) */
+.why-us-container.active .why-us-image,
+.why-us-container.active .why-us-content {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+/* --- GAMBAR & SHAPE --- */
+.why-us-image {
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.why-us-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    85% 100%,
+    0% 100%
+  ); /* Potongan trapesium kiri */
+  position: relative;
+  z-index: 2;
+}
+
+.phase-2-img img {
+  clip-path: polygon(
+    15% 0,
+    100% 0,
+    100% 100%,
+    0% 100%
+  ); /* Potongan trapesium kanan dibalik */
+}
+
+.orange-accent-box {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  width: 50%;
+  height: 200px;
+  background-color: var(--brand-orange);
+  z-index: 1;
+}
+
+.phase-2-img .orange-accent-box {
+  left: auto;
+  right: -20px; /* Kotak orange pindah ke kanan */
+}
+
+/* --- TYPOGRAPHY --- */
+.why-us-content h2 {
+  color: #fff;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin: 1rem 0 1.5rem;
+  font-style: italic;
+}
+
+.why-us-content .desc {
+  color: #a1a1aa;
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+.why-features {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.why-feature {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.icon-outline {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.icon-outline svg {
+  width: 35px;
+  height: 35px;
+}
+
+.why-feature h4 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.why-feature p {
+  color: #a1a1aa;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* --- RESPONSIVE UNTUK SCROLLY --- */
+@media (max-width: 992px) {
+  .why-us-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .phase-2 {
+    display: flex;
+    flex-direction: column-reverse; /* Menjaga urutan layout di HP */
+  }
+  .why-us-image {
+    height: 350px;
+  }
+  .why-us-image img,
+  .phase-2-img img {
+    clip-path: none; /* Hilangkan shape miring di HP */
+  }
+}
+
+/* ==========================================
+   LARGE DARK CTA (ukuran gede.jpg style)
+   ========================================== */
+.large-dark-cta {
+  position: relative;
+  width: 100%;
+  padding: 8rem 5%;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+}
+
+.cta-overlay {
+  position: absolute;
+  inset: 0;
+  /* Gradien gelap dari kiri ke kanan */
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: 1;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px; /* Teks di rata kiri */
+  color: #fff;
+}
+
+.cta-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 1rem;
+}
+
+.cta-header .line {
+  width: 50px;
+  height: 2px;
+  background-color: var(--brand-orange);
+}
+
+.eyebrow-cta {
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--brand-orange);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+}
+
+.cta-content h2 {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+.cta-content p {
+  font-size: 1.1rem;
+  color: #e4e4e7;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.btn-red-cta {
+  background-color: var(--brand-orange);
+  color: #fff;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 0; /* Kotak tajam seperti di gambar */
+  transition: all 0.3s ease;
+}
+
+.btn-red-cta:hover {
+  background-color: #e65500;
+  transform: translateY(-2px);
+}
+
+/* --- RESPONSIVE UNTUK ELEMEN BARU --- */
+@media (max-width: 992px) {
+  .why-us-container {
+    grid-template-columns: 1fr;
+  }
+  .why-us-image {
+    height: 400px;
+    order: -1; /* Gambar tetap di atas saat di HP */
+  }
+  .why-us-image img {
+    clip-path: none; /* Hilangkan potongan miring di HP agar proporsional */
+  }
+  .cta-content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .partner-grid-container {
+    flex-direction: column;
+  }
+  .marquee-content {
+    font-size: 2rem;
+  }
+  .cta-overlay {
+    background: rgba(
+      0,
+      0,
+      0,
+      0.8
+    ); /* Gelapkan seluruhnya di HP agar teks terbaca */
+  }
+}
+
+/* ==========================================
+   BIG TYPOGRAPHY STATEMENT SECTION
+   ========================================== */
+.big-statement-section {
+  padding: 8rem 5%;
+  background-color: var(--bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* Garis batas halus di bawah section */
+  border-bottom: 1px solid var(--border-color);
+}
+
+.statement-container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Memastikan tulisan eyebrow ke tengah */
+.big-statement-section .eyebrow {
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+/* Teks Super Besar dengan clamp() agar responsif otomatis */
+.massive-text {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+}
+
+.massive-text .text-orange {
+  color: var(--brand-orange);
+}
+
+/* Efek teks transparan dengan garis pinggir */
+.massive-text .outline-text {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--text-main);
+}
+
+/* Penyesuaian responsif untuk HP */
+@media (max-width: 768px) {
+  .big-statement-section {
+    padding: 5rem 5%;
+  }
+  .massive-text .outline-text {
+    -webkit-text-stroke: 1px var(--text-main);
+  }
+} /* ==========================================
+   METRICS / TRANSPARENT SECTION (WEBFLOW STYLE)
+   ========================================== */
+.metrics-transparent-section {
+  padding: 8rem 5%;
+  /* BACKGROUND TRANSPARAN: */
+  background-color: transparent;
+  /* Garis pemisah atas-bawah yang elegan */
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.metrics-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; /* Tata letak asimetris: 1 bagian kiri, 1.5 bagian kanan */
+  gap: 5rem;
+  align-items: center;
+}
+
+.metrics-header h2 {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+}
+
+.metrics-header p {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.metric-item {
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: transparent; /* Tetap transparan di dalam box */
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efek Hover Keren bergaya Modern Agency */
+.metric-item:hover {
+  border-color: var(--brand-orange);
+  transform: translateY(-5px);
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* Sedikit efek kaca saat dihover */
+}
+
+/* Efek Glow Oranye samar dari sudut atas saat dihover */
+.metric-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle at top right,
+    rgba(255, 94, 0, 0.08),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.metric-item:hover::before {
+  opacity: 1;
+}
+
+.metric-number {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(3rem, 4vw, 4rem);
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+/* Mengatur ukuran simbol/teks pendamping angka agar estetik */
+.metric-number .text-orange {
+  color: var(--brand-orange);
+  font-size: 1.8rem;
+  vertical-align: super;
+  margin-left: 2px;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 992px) {
+  .metrics-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .metrics-transparent-section {
+    padding: 5rem 5%;
+  }
+  .metrics-grid {
+    grid-template-columns: 1fr; /* Jadi 1 kolom bersusun di HP */
+    gap: 1rem;
+  }
+  .metric-item {
+    padding: 2rem;
+  }
+}
+
+/* ==========================================
+   CRM & INTEGRATION SECTION
+   ========================================== */
+.crm-integration-section {
+  padding: 8rem 5%;
+  /* background-color: var(
+    --bg-card
+  ); */
+  border-top: 1px solid var(--border-color);
+}
+
+.crm-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.crm-text h2 {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+}
+
+.crm-text p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.crm-features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.crm-features-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.crm-features-list li strong {
+  color: var(--text-main);
+}
+
+.crm-features-list svg {
+  width: 24px;
+  height: 24px;
+  color: var(--brand-orange);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Form Card Styling */
+.crm-form-card {
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 3rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+.form-header {
+  margin-bottom: 2rem;
+}
+
+.form-header h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.modern-crm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.modern-crm-form input,
+.modern-crm-form select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-card);
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.modern-crm-form input:focus,
+.modern-crm-form select:focus {
+  border-color: var(--brand-orange);
+  box-shadow: 0 0 0 3px rgba(255, 94, 0, 0.1);
+  background-color: var(--bg-light);
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: "▼";
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.modern-crm-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.btn-submit-crm {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Responsive CRM Section */
+@media (max-width: 992px) {
+  .crm-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .crm-form-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+
+/* Update pada section Technical Specs agar mendukung animasi latar */
+.tech-specs-section {
+    position: relative; /* Wajib agar elemen absolute di dalamnya terkunci di sini */
+    padding: 8rem 5%;
+    background-color: var(--bg-light);
+    overflow: hidden; /* Mencegah pesawat terlihat saat di luar area section */
+}
+
+/* Pastikan konten tabel berada di atas animasi */
+.specs-container {
+    position: relative;
+    z-index: 2; /* Menempatkan tabel di atas SVG pesawat */
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Memperhalus tampilan tabel agar efek transparan animasi terlihat sedikit di belakangnya */
+.table-responsive {
+    background: rgba(255, 255, 255, 0.9); /* Sedikit transparan agar menyatu */
+    backdrop-filter: blur(5px); /* Efek blur halus di belakang tabel */
+}
+
+/* --- BRAND RIBBON (AUSTRALIA EDITION) --- */
+.brand-ribbon-section {
+    background-color: #09090b; 
+    padding: 2.5rem 0; /* Padding diperbesar agar logo besar tidak sesak */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.brand-ribbon-wrapper {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    user-select: none;
+}
+
+.brand-ribbon-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem; /* Jarak antar item */
+    padding-right: 4rem; /* WAJIB: Sama dengan gap agar loop nyambung sempurna */
+    animation: scrollBrand 25s linear infinite;
+    flex-shrink: 0;
+    min-width: max-content; /* WAJIB: Agar container tidak menyusut */
+}
+
+.brand-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.brand-item img {
+    height: 50px; /* DIPERBESAR dari 35px agar seimbang dengan teks */
+    width: auto;
+    /* filter: brightness(0) invert(1); */
+    object-fit: contain;
+}
+
+.brand-loc {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem; /* Menyesuaikan agar proporsional dengan logo 60px */
+    color: #ffffff;
+    letter-spacing: 0.1em;
+}
+
+.brand-separator {
+    color: var(--brand-orange);
+    font-size: 1.5rem;
+}
+
+/* Animasi Marquee: Berjalan dari 0 ke -100% (1 blok penuh) */
+@keyframes scrollBrand {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Hover effect: Melambat saat di-hover */
+.brand-ribbon-wrapper:hover .brand-ribbon-content {
+    animation-play-state: paused;
+}
+
+/* Responsif HP */
+@media (max-width: 768px) {
+    .brand-item img { height: 40px; }
+    .brand-loc { font-size: 1.5rem; }
+    .brand-ribbon-content { gap: 2rem; padding-right: 2rem; }
+}
+
+
+/* ==========================================
+   ANIMASI BIG STATEMENT (3D UNFOLD)
+   ========================================== */
+
+/* Berikan perspektif pada container teks agar efek 3D (rotateX) terlihat nyata */
+.massive-text {
+    perspective: 1000px;
+}
+
+/* State Awal (Saat elemen belum terlihat di layar / disembunyikan) */
+.statement-anim .statement-eyebrow {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.statement-anim .text-line {
+    display: inline-block;
+    opacity: 0;
+    /* Teks ditekuk ke belakang sejauh 45 derajat dan digeser ke bawah */
+    transform: translateY(60px) rotateX(-45deg);
+    transform-origin: bottom center;
+    transition: all 0.9s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* State Akhir (Saat elemen masuk ke layar dan JS menambahkan class .active) */
+.statement-anim.active .statement-eyebrow {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.1s; /* Masuk paling awal */
+}
+
+.statement-anim.active .line-1 {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    transition-delay: 0.3s; /* Menyusul setelah eyebrow */
+}
+
+.statement-anim.active .line-2 {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    transition-delay: 0.5s; /* Menyusul baris 1 */
+}
+
+.statement-anim.active .line-3 {
+    opacity: 1;
+    /* Kata IMPACT diberikan sedikit efek scale agar lebih menonjol di akhir */
+    transform: translateY(0) rotateX(0) scale(1.05);
+    transition-delay: 0.7s; /* Masuk paling akhir sebagai punchline */
+}
+
+/* ==========================================
+   PARTNER SCROLLYTELLING SECTION
+   ========================================== */
+/* ==========================================
+   LIGHT PREMIUM CTA (ORANGE CARD)
+   ========================================== */
+.cargo-cta-light {
+    background-color: #ffffff; /* Latar belakang halaman putih bersih */
+    padding: 8rem 5%;
+    overflow: hidden; /* Menjaga agar foto yang melayang tidak memunculkan scroll horizontal */
+}
+
+.cta-light-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Kartu Oranye Elegan */
+.cta-orange-card {
+    background: var(--brand-orange);
+    border-radius: 32px;
+    padding: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(255, 94, 0, 0.25);
+}
+
+/* Pola titik-titik samar (Blueprint aesthetic) pada kartu oranye */
+.cta-orange-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.25) 2px, transparent 2px);
+    background-size: 30px 30px;
+    border-radius: 32px;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Konten Teks */
+.cta-text-content {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+}
+
+.cta-text-content h2 {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.cta-text-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+    max-width: 90%;
+}
+
+.cta-actions {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+}
+
+/* Tombol Khusus di Dalam Kartu Oranye */
+.btn-white {
+    background: #ffffff;
+    color: var(--brand-orange);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-white:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-outline-white {
+    background: transparent;
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-white:hover {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- VISUAL KARTU FOTO (FLOATING) --- */
+.cta-visual-cards {
+    position: relative;
+    height: 100%;
+    min-height: 400px;
+    z-index: 2;
+}
+
+/* Bingkai putih ala foto polaroid/katalog premium */
+.photo-card {
+    position: absolute;
+    background: #ffffff;
+    padding: 14px;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), z-index 0s;
+}
+
+.photo-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Mengatur Posisi dan Rotasi Foto agar Terlihat "Dilempar" Rapi */
+.card-1 {
+    width: 85%;
+    top: -15%;
+    right: -15%;
+    transform: rotate(4deg);
+    z-index: 2;
+}
+
+.card-2 {
+    width: 75%;
+    bottom: -15%;
+    left: -5%;
+    transform: rotate(-5deg);
+    z-index: 1;
+}
+
+/* Efek interaktif: Foto akan lurus dan membesar saat mouse diarahkan */
+.photo-card:hover {
+    transform: scale(1.05) translateY(-10px) rotate(0deg);
+    z-index: 3;
+    box-shadow: 0 35px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 992px) {
+    .cta-orange-card {
+        grid-template-columns: 1fr;
+        padding: 4rem 3rem;
+        text-align: center;
+        gap: 6rem;
+    }
+    .cta-text-content p {
+        margin: 0 auto 2.5rem auto;
+    }
+    .cta-actions {
+        justify-content: center;
+    }
+    .cta-visual-cards {
+        min-height: 350px;
+    }
+    .card-1 { right: -5%; width: 70%; top: -10%; }
+    .card-2 { left: -5%; width: 70%; bottom: -10%; }
+}
+
+@media (max-width: 768px) {
+    .cargo-cta-light { padding: 6rem 5%; }
+    .cta-orange-card { padding: 3rem 2rem; border-radius: 24px; }
+    .card-1 { top: -20%; right: -5%; width: 85%; }
+    .card-2 { bottom: -10%; left: -5%; width: 85%; }
+}
+
+/* ==========================================
+   PARTNER SCROLLYTELLING SECTION (WITH BG CROSSFADE)
+   ========================================== */
+.partner-scrolly {
+    position: relative;
+    background-color: #09090b; 
+    height: 150vh; /* Memberi ruang scroll */
+    padding-top: 1px; /* Mencegah margin collapse / kebocoran layout */
+}
+
+.partner-sticky {
+    position: sticky;
+    top: 15vh; /* Berhenti sedikit di bawah ujung atas layar agar elegan */
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* LAYER BACKGROUND UNTUK EFEK CROSSFADE */
+.bg-phase {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efek parallax background */
+    opacity: 0;
+    transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1); /* Transisi gambar halus */
+    z-index: 0;
+}
+
+.bg-phase.active {
+    opacity: 1;
+}
+
+.cta-overlay-sticky {
+    position: absolute;
+    inset: 0;
+    /* Gradien gelap Kiri dan Kanan agar teks terbaca di kedua sisi */
+    background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.95) 100%);
+    z-index: 1; /* Di atas gambar, di bawah teks */
+}
+
+/* Teknik Grid agar tinggi otomatis menyesuaikan padding */
+.partner-content-stack {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    padding: 8rem 5%; /* Kembali menggunakan ukuran padding original */
+    position: relative;
+    z-index: 2;
+}
+
+.partner-container {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.partner-container.active {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* PHASE 1: KIRI */
+.p-phase-1 .cta-content {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    max-width: 600px;
+}
+
+.p-phase-1.active .cta-content {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* PHASE 2: KANAN */
+.p-phase-2 {
+    justify-content: flex-end; /* Paksa posisi ke kanan */
+}
+
+.p-phase-2 .cta-content.right-aligned {
+    opacity: 0;
+    transform: translateX(100px); /* Masuk dari kanan */
+    text-align: right;
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    max-width: 600px;
+}
+
+.p-phase-2.active .cta-content.right-aligned {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.p-phase-2 .cta-header {
+    justify-content: flex-end; /* Membalik teks eyebrow ke kanan */
+}
+
+/* Responsif HP */
+@media (max-width: 768px) {
+    .partner-content-stack {
+        padding: 5rem 5%; /* Padding HP dikurangi agar tidak terlalu besar */
+    }
+    .p-phase-2 .cta-content.right-aligned {
+        text-align: left; /* Teks kembali rata kiri di layar sempit */
+    }
+    .p-phase-2 .cta-header {
+        justify-content: flex-start;
+    }
+    .cta-overlay-sticky {
+        background: rgba(0,0,0,0.85); /* Lebih gelap merata di HP */
+    }
+}
+
+/* ==========================================
+   ENTERPRISE ECOSYSTEM (PREMIUM MARQUEE)
+   ========================================== */
+.trusted-partners-section {
+    background-color: var(--bg-card); /* Warna abu-abu sangat muda agar beda dengan section atasnya */
+    padding: 6rem 0 8rem 0;
+    border-top: 1px solid var(--border-color);
+    overflow: hidden;
+    position: relative;
+}
+
+.partners-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 0 5%;
+}
+
+.partners-title {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    color: var(--text-main);
+    font-weight: 800;
+    margin-top: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.marquee-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem; /* Jarak antar baris atas dan bawah */
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* FADE MASK: Efek menghilang halus di kiri & kanan layar */
+.marquee-fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    z-index: 2;
+    pointer-events: none;
+}
+.fade-left {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-card) 0%, transparent 100%);
+}
+.fade-right {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-card) 0%, transparent 100%);
+}
+
+.marquee-track {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    user-select: none;
+}
+
+.marquee-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 5rem;
+    padding-right: 5rem; /* WAJIB SAMA DENGAN GAP AGAR LOOP MULUS */
+    flex-shrink: 0;
+    min-width: max-content;
+}
+
+/* Animasi dihentikan saat kursor diarahkan ke area marquee */
+.marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+/* Arah Animasi */
+.track-left .marquee-content {
+    animation: scrollLeft 40s linear infinite;
+}
+.track-right .content-right {
+    animation: scrollRight 45s linear infinite; /* Sedikit lebih lambat dari baris 1 agar dinamis */
+}
+
+/* STYLING LOGO KELAS ENTERPRISE */
+.marquee-content img {
+    height: 50px; /* Ukuran proporsional tidak terlalu raksasa */
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    
+    /* Rahasia Desain: Menghapus background putih JPG & menjadikannya abu-abu elegan */
+    mix-blend-mode: multiply; 
+    /* filter: grayscale(100%) opacity(0.5);  */
+    
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+}
+
+/* Efek menyala & berwarna kembali saat dihover */
+.marquee-content img:hover {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.1);
+}
+
+/* Keyframes Animasi Kiri & Kanan */
+@keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes scrollRight {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+}
+
+/* --- RESPONSIF --- */
+@media (max-width: 768px) {
+    .marquee-content img { height: 35px; max-width: 150px; }
+    .marquee-content { gap: 3rem; padding-right: 3rem; }
+    .marquee-container { gap: 2rem; }
+    .marquee-fade { width: 10%; }
+}
