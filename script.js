@@ -218,4 +218,80 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    // ==========================================
+    // 8. FLEET DETAILS OVERLAY (MODAL) LOGIC
+    // ==========================================
+    const fleetLinks = document.querySelectorAll('.fleet-card .card-link');
+    
+    // Buat elemen overlay modal dan suntikkan ke body
+    const modalOverlay = document.createElement('div');
+    modalOverlay.className = 'fleet-modal-overlay';
+    modalOverlay.innerHTML = `
+        <div class="fleet-modal-container">
+            <button class="fleet-modal-close">&times;</button>
+            <div class="fleet-modal-image-area">
+                <img src="" id="modal-img" alt="Drone Image">
+            </div>
+            <div class="fleet-modal-content-area">
+                <span class="eyebrow" id="modal-badge"></span>
+                <h2 id="modal-title"></h2>
+                <p class="desc" id="modal-desc"></p>
+                <ul class="specs-list" id="modal-specs"></ul>
+                <button class="btn btn-primary" style="width: 100%;">Download Data Sheet</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modalOverlay);
+
+    const closeBtn = modalOverlay.querySelector('.fleet-modal-close');
+
+    // Fungsi membuka modal dan mempopulasi data
+    function openModal(cardElement) {
+        // Ambil data dari kartu HTML yang diklik
+        const imgSrc = cardElement.querySelector('img').src;
+        const badgeText = cardElement.querySelector('.card-badge').innerText;
+        const title = cardElement.querySelector('h3').innerText;
+        const desc = cardElement.querySelector('.card-desc').innerText;
+        const specsHTML = cardElement.querySelector('.specs-list').innerHTML;
+
+        // Masukkan data ke dalam modal
+        modalOverlay.querySelector('#modal-img').src = imgSrc;
+        modalOverlay.querySelector('#modal-badge').innerText = badgeText;
+        modalOverlay.querySelector('#modal-title').innerText = title;
+        modalOverlay.querySelector('#modal-desc').innerText = desc;
+        modalOverlay.querySelector('#modal-specs').innerHTML = specsHTML;
+
+        // Tampilkan modal & hentikan scroll di background
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Fungsi menutup modal
+    function closeModal() {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Event listener untuk tombol "View Details"
+    fleetLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Mencegah pindah halaman
+            const card = e.target.closest('.fleet-card');
+            if (card) openModal(card);
+        });
+    });
+
+    // Event listener untuk tombol close, klik di luar modal, dan tombol Escape
+    closeBtn.addEventListener('click', closeModal);
+    
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+            closeModal();
+        }
+    });
 });

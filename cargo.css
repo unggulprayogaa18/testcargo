@@ -2126,15 +2126,15 @@ a {
 /* Mengatur Posisi dan Rotasi Foto agar Terlihat "Dilempar" Rapi */
 /* Mengatur Posisi Persis seperti design.jpg */
 .card-1 {
-  top: -20px; /* Terry di atas */
-  right: 20px;
+  top: -50px; /* Terry di atas */
+  right: -20px;
   transform: rotate(4deg);
   z-index: 1;
 }
 
 .card-2 {
-  bottom: -40px; /* Kristian menonjol di bawah depan */
-  right: 180px; /* Geser ke kiri sedikit agar tumpang tindih */
+  bottom: -60px; /* Kristian menonjol di bawah depan */
+  right: 120px; /* Geser ke kiri sedikit agar tumpang tindih */
   transform: rotate(-3deg);
   z-index: 5; /* Pastikan Kristian di depan (paling tinggi) */
 }
@@ -2172,14 +2172,14 @@ a {
   }
   .card-1 {
     top: -20px; /* Terry di atas */
-    right: 20px;
+    right:100px;
     transform: rotate(4deg);
     z-index: 1;
   }
 
   .card-2 {
     bottom: -40px; /* Kristian menonjol di bawah depan */
-    right: 180px; /* Geser ke kiri sedikit agar tumpang tindih */
+    right: 250px; /* Geser ke kiri sedikit agar tumpang tindih */
     transform: rotate(-3deg);
     z-index: 5; /* Pastikan Kristian di depan (paling tinggi) */
   }
@@ -2192,7 +2192,7 @@ a {
     padding: 12px; /* Padding putih di sekeliling foto */
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-    width: 100px; /* Ukuran tetap agar wajah terjaga proporsinya */
+    width: 230px!important; /* Ukuran tetap agar wajah terjaga proporsinya */
   }
 
   .cta-orange-card {
@@ -2202,20 +2202,23 @@ a {
     gap: 6rem;
   }
   .cargo-cta-light {
-    padding: 6rem 5%;
+    padding: 3rem 5%;
   }
   .cta-orange-card {
-    padding: 3rem 2rem;
+    padding: 1rem 1rem;
     border-radius: 24px;
   }
+    .cta-visual-cards {
+    min-height: 420px;
+  }
   .card-1 {
-    top: -20%;
-    right: -5%;
+    top: 0%;
+    right: 10%;
     width: 85%;
   }
   .card-2 {
-    bottom: -10%;
-    left: -5%;
+    bottom: 10%;
+    left:15%;
     width: 85%;
   }
 }
@@ -2484,5 +2487,157 @@ a {
   }
   .marquee-fade {
     width: 10%;
+  }
+}
+
+
+
+/* ==========================================
+   FLEET DETAILS MODERN OVERLAY (MODAL)
+   ========================================== */
+.fleet-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 9, 11, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  
+  /* Initial State for Animation */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.fleet-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fleet-modal-container {
+  background: var(--bg-light);
+  width: 100%;
+  max-width: 950px;
+  max-height: 90vh;
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  
+  /* Initial State for Animation */
+  transform: translateY(40px) scale(0.95);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.fleet-modal-overlay.active .fleet-modal-container {
+  transform: translateY(0) scale(1);
+}
+
+.fleet-modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.fleet-modal-close:hover {
+  background: var(--brand-orange);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.fleet-modal-image-area {
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  position: relative;
+}
+
+/* Pola background opsional untuk area gambar */
+.fleet-modal-image-area::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+.fleet-modal-image-area img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.15));
+  position: relative;
+  z-index: 2;
+}
+
+.fleet-modal-content-area {
+  padding: 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.fleet-modal-content-area h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+.fleet-modal-content-area .desc {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Re-use specs-list layout for modal */
+.fleet-modal-content-area .specs-list {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 990px) {
+  .fleet-modal-container {
+    grid-template-columns: 1fr;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .fleet-modal-image-area {
+    padding: 2rem;
+    height: 300px;
+  }
+  .fleet-modal-close {
+    background: var(--bg-light);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .fleet-modal-content-area {
+    padding: 2.5rem 2rem;
   }
 }
