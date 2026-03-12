@@ -1373,11 +1373,12 @@ a {
 .cta-overlay-sticky {
   position: absolute;
   inset: 0;
+  height:100vh;
   background: linear-gradient(
     90deg,
-    rgb(0 0 0 / 85%) 0%,
-    rgb(0 0 0 / 16%) 50%,
-    rgb(0 0 0 / 85%) 100%
+    rgb(0 0 0 / 95%) 0%,
+    rgb(0 0 0 / 36%) 50%,
+    rgb(0 0 0 / 95%) 100%
   );
   z-index: 1;
 }
@@ -3031,13 +3032,16 @@ http://127.0.0.1:3000/pushgithubcargo/index.html?serverWindowId=b734f7bf-3eca-41
   }
 }
 /* Styling khusus untuk video background di dalam bg-phase */
+/* Styling khusus untuk video background di dalam bg-phase */
 .bg-video {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Membuat video memenuhi layar tanpa merusak proporsi */
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
+  /* Tambahkan baris di bawah ini untuk efek abu-abu */
+  filter: grayscale(100%); 
 }
 
 /* --- INLINE VIDEO LOGIC (WHY US SECTION) --- */
