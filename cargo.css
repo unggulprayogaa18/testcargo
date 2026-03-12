@@ -469,7 +469,10 @@ a {
   position: relative;
   height: 240px;
   overflow: hidden;
-  background-color: var(--bg-card);
+  /* background-color: var(--bg-card); */
+  background-image: url("assets/foto/cloud.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .card-image-wrapper img {
@@ -1367,15 +1370,14 @@ a {
   align-items: center;
 }
 
-.cta-overlay {
+.cta-overlay-sticky {
   position: absolute;
   inset: 0;
-  /* Gradien gelap dari kiri ke kanan */
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.7) 50%,
-    rgba(0, 0, 0, 0.2) 100%
+    rgb(0 0 0 / 85%) 0%,
+    rgb(0 0 0 / 16%) 50%,
+    rgb(0 0 0 / 85%) 100%
   );
   z-index: 1;
 }
@@ -1393,6 +1395,7 @@ a {
   gap: 15px;
   margin-bottom: 1rem;
 }
+http://127.0.0.1:3000/pushgithubcargo/index.html?serverWindowId=b734f7bf-3eca-410d-be27-9da07f4c50fa#
 
 .cta-header .line {
   width: 50px;
@@ -2172,7 +2175,7 @@ a {
   }
   .card-1 {
     top: -20px; /* Terry di atas */
-    right:100px;
+    right: 100px;
     transform: rotate(4deg);
     z-index: 1;
   }
@@ -2192,7 +2195,7 @@ a {
     padding: 12px; /* Padding putih di sekeliling foto */
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-    width: 230px!important; /* Ukuran tetap agar wajah terjaga proporsinya */
+    width: 230px !important; /* Ukuran tetap agar wajah terjaga proporsinya */
   }
 
   .cta-orange-card {
@@ -2208,7 +2211,7 @@ a {
     padding: 1rem 1rem;
     border-radius: 24px;
   }
-    .cta-visual-cards {
+  .cta-visual-cards {
     min-height: 420px;
   }
   .card-1 {
@@ -2218,7 +2221,7 @@ a {
   }
   .card-2 {
     bottom: 10%;
-    left:15%;
+    left: 15%;
     width: 85%;
   }
 }
@@ -2266,7 +2269,7 @@ a {
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.06) 50%,
     rgba(0, 0, 0, 0.95) 100%
   );
   z-index: 1; /* Di atas gambar, di bawah teks */
@@ -2282,15 +2285,79 @@ a {
   z-index: 2;
 }
 
+/* Pastikan container menggunakan Flexbox untuk mensejajarkan kiri-kanan */
 .partner-container {
   grid-column: 1;
   grid-row: 1;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Menjauhkan teks dan gambar */
+  gap: 4rem; /* Jarak antara teks dan gambar */
+  width: 100%;
   visibility: hidden;
   pointer-events: none;
 }
 
+/* Styling & Animasi untuk Gambar di Samping */
+.cta-side-image {
+  flex: 1;
+  max-width: 500px;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.cta-side-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animasi Masuk Gambar Fase 1 (Dari Kanan ke Kiri) */
+.p-phase-1 .cta-side-image {
+  transform: translateX(100px);
+}
+.p-phase-1.active .cta-side-image {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Animasi Masuk Gambar Fase 2 (Dari Kiri ke Kanan) */
+.p-phase-2 .cta-side-image {
+  transform: translateX(-100px);
+}
+.p-phase-2.active .cta-side-image {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Responsif untuk Mobile (Ditumpuk Atas-Bawah) */
+@media (max-width: 992px) {
+  .partner-container {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  /* Balik urutan di Fase 2 agar di HP tetap gambar/teks berurutan logis */
+  .p-phase-2 {
+    justify-content: space-between; /* <-- INI KUNCI FIX-NYA: Ganti dari flex-end menjadi space-between */
+  }
+
+  .cta-side-image {
+    max-width: 80%;
+  }
+
+  .p-phase-2 .cta-content.right-aligned {
+    text-align: center;
+  }
+
+  .p-phase-2 .cta-header {
+    justify-content: center;
+  }
+}
 .partner-container.active {
   visibility: visible;
   pointer-events: auto;
@@ -2490,27 +2557,316 @@ a {
   }
 }
 
-
-
 /* ==========================================
-   FLEET DETAILS MODERN OVERLAY (MODAL)
+   RESPONSIVE: FLEET SCROLLY & MODAL
+   ========================================== */
+/* ==========================================
+   RESPONSIVE: FLEET SCROLLY & MODAL (PERBAIKAN ANIMASI)
+   ========================================== */
+@media (max-width: 992px) {
+  /* 1. Kembalikan Tinggi untuk ruang scroll animasi JS */
+  /* .fleet-scrolly-section {
+    height: 200vh !important;
+    padding-top: 50px !important;
+  } */
+
+  /* 2. Kunci layar agar animasi bisa berjalan di tempat (Sticky) */
+  .fleet-sticky-container {
+    position: sticky !important;
+    top: 0;
+    height: 100vh !important;
+    display: flex !important;
+    align-items: center;
+    overflow: hidden !important;
+    padding: 0 5% !important;
+  }
+
+  /* 3. Kembalikan sifat Fase (Sembunyi sebelum waktunya/di-scroll) */
+  .fleet-phase {
+    position: absolute !important;
+    width: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(50px) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    padding: 0 5% !important;
+    margin: 0 !important;
+  }
+
+  /* Saat di-scroll, Fase menjadi aktif */
+  .fleet-phase.active {
+    transform: translateX(-50%) translateY(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  /* Animasi khusus Fase 1 menghilang ke atas */
+  .fleet-phase-1:not(.active) {
+    transform: translateX(-50%) translateY(-100px) !important;
+  }
+
+  /* 4. Grid vertikal untuk kartu */
+  .fleet-grid-2 {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.8rem !important; /* Dirapatkan maksimal */
+  }
+
+  /* ==========================================================
+     5. KOMPRESI EKSTREM AGAR MUAT 1 LAYAR HP (Anti-Nyangkut)
+     ========================================================== */
+  .fleet-phase .section-header-modern {
+    margin-bottom: 0.8rem !important;
+    text-align: center;
+  }
+
+  .fleet-phase .section-header-modern h2 {
+    font-size: 1.6rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .fleet-phase .section-header-modern p {
+    font-size: 0.85rem !important;
+    margin-bottom: 0 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Batasi teks header maksimal 2 baris */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-image-wrapper {
+    height: 110px !important; /* Gambar dipendekkan banyak */
+  }
+
+  .card-content {
+    padding: 1rem !important;
+  }
+
+  .card-content h3 {
+    font-size: 1.2rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* TRIK UTAMA: Sembunyikan deskripsi di kartu agar tidak makan tempat! */
+  /* Tenang, teks deskripsinya tetap muncul kok saat Modal/View Details diklik */
+  .card-desc {
+    display: none !important;
+  }
+
+  .specs-list {
+    padding-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .specs-list li {
+    margin-bottom: 0.2rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .card-link {
+    font-size: 0.85rem !important;
+  }
+
+  /* Latar animasi redup */
+  .flight-animation-bg {
+    height: 100% !important;
+    opacity: 0.15 !important;
+  }
+  .fleet-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .fleet-sticky-container {
+    align-items: flex-start;
+    padding-top: 50px;
+  }
+  .fleet-phase {
+    transform: translateX(-50%) translateY(50px);
+  }
+
+  /* 1. Tampilkan kembali SVG Animasi */
+  .flight-animation-bg {
+    opacity: 0.8 !important; /* Naikkan opacity agar garis & pesawat terlihat jelas */
+    z-index: 0 !important;
+  }
+
+  /* 2. Pusatkan Teks Judul */
+  .fleet-phase .section-header-modern {
+    margin: 0 auto 2rem auto !important;
+    text-align: center !important;
+    width: 100%;
+  }
+
+  .fleet-phase .section-header-modern p {
+    display: block !important;
+    -webkit-line-clamp: unset !important; /* Hilangkan potongan batasan baris teks */
+    margin: 0 auto !important;
+  }
+
+  /* 3. Kembalikan Ukuran Card Agar Tidak Pendek */
+  /* Kita buat jadi 2 kolom di ukuran tablet agar card bisa tinggi tanpa menembus batas layar bawah */
+  .fleet-grid-2 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+
+  .card-image-wrapper {
+    height: 180px !important; /* Tinggikan gambar (sebelumnya sangat pendek 110px) */
+  }
+
+  .card-desc {
+    display: block !important; /* Munculkan lagi deskripsi yang sebelumnya disembunyikan */
+    font-size: 0.9rem !important;
+    margin-bottom: 1rem !important;
+  }
+}
+/* Khusus Mobile Phone (Maksimal 768px) */
+@media (max-width: 768px) {
+  /* --- Penyesuaian Teks & Spasi Section Fleet --- */
+  .fleet-phase .section-header-modern {
+    text-align: left; /* Rata kiri lebih enak dibaca di HP */
+    margin-bottom: 2rem;
+  }
+  .fleet-phase .section-header-modern h2 {
+    font-size: 2rem;
+  }
+  .card-content {
+    padding: 1.5rem; /* Kurangi padding kartu di HP */
+  }
+
+  /* --- Penyesuaian Modal (View Details) --- */
+  .fleet-modal-container {
+    grid-template-columns: 1fr;
+    width: 95%;
+    max-height: 85vh; /* Jangan penuhi 100% layar, sisakan sedikit ruang */
+    overflow-y: auto; /* Izinkan scroll di dalam modal jika teksnya panjang */
+    border-radius: 16px;
+  }
+
+  .fleet-modal-image-area {
+    height: 220px;
+    padding: 1.5rem;
+    background-image: url("assets/foto/cloud.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .fleet-modal-content-area {
+    padding: 1.5rem;
+  }
+
+  .fleet-modal-content-area h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .fleet-modal-content-area .desc {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Tombol Close sedikit dikecilkan dan warnanya ditegaskan */
+  .fleet-modal-close {
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+    background: rgba(
+      255,
+      255,
+      255,
+      0.9
+    ); /* Latar putih transparan agar terlihat di atas gambar */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+/* ==========================================
+   FLEET SCROLLYTELLING SECTION (PHASE 1 & 2)
+   ========================================== */
+.fleet-scrolly-section {
+  position: relative;
+  background-color: var(--bg-light);
+  height: 200vh;
+  z-index: 1; /* Membuat konteks tumpukan dasar */
+}
+
+/* FIX: Paksa animasi path SVG ke paling belakang layar */
+.flight-animation-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1 !important; /* !important menimpa inline style di HTML */
+  pointer-events: none; /* Mencegah path menghalangi klik kursor */
+}
+
+.fleet-sticky-container {
+  position: sticky;
+  top: 0;
+  height: 117vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 5%;
+  z-index: 2; /* Konten pesawat maju ke depan */
+}
+
+/* Base style untuk fase (Menunggu di bawah layar) */
+.fleet-phase {
+  position: absolute;
+  width: 100%;
+  max-width: 1200px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Saat Fase Aktif (Masuk ke tengah layat) */
+.fleet-phase.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+  z-index: 10;
+}
+
+/* Animasi khusus Fase 1: Saat tidak aktif, dia menghilang ke ATAS */
+.fleet-phase-1:not(.active) {
+  transform: translateX(-50%) translateY(-100px);
+}
+
+.fleet-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+/* ==========================================
+   MODAL VIEW DETAILS (POPUP AIRCRAFT)
    ========================================== */
 .fleet-modal-overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(9, 9, 11, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  
-  /* Initial State for Animation */
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.4s ease;
 }
 
 .fleet-modal-overlay.active {
@@ -2518,43 +2874,43 @@ a {
   visibility: visible;
 }
 
+/* Kontainer Popup */
 .fleet-modal-container {
   background: var(--bg-light);
-  width: 100%;
-  max-width: 950px;
-  max-height: 90vh;
+  width: 90%;
+  max-width: 900px;
   border-radius: 24px;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  overflow: hidden;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  
-  /* Initial State for Animation */
-  transform: translateY(40px) scale(0.95);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  /* Animasi mengecil & turun sedikit saat sembunyi */
+  transform: scale(0.95) translateY(30px);
   transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
 }
 
+/* Efek membesar (bounce) saat Modal Aktif */
 .fleet-modal-overlay.active .fleet-modal-container {
-  transform: translateY(0) scale(1);
+  transform: scale(1) translateY(0);
 }
 
+/* Tombol Close (X) */
 .fleet-modal-close {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.05);
-  border: none;
-  font-size: 1.5rem;
+  top: 15px;
+  right: 15px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   color: var(--text-main);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
 }
@@ -2565,41 +2921,31 @@ a {
   transform: rotate(90deg);
 }
 
+/* Sisi Kiri: Area Gambar */
 .fleet-modal-image-area {
-  background: var(--bg-card);
+  /* background: var(--bg-card); */
+  background-image: url("assets/foto/cloud.png");
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem;
-  position: relative;
-}
-
-/* Pola background opsional untuk area gambar */
-.fleet-modal-image-area::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px);
-  background-size: 20px 20px;
-  pointer-events: none;
+  padding: 2rem;
 }
 
 .fleet-modal-image-area img {
   width: 100%;
   height: auto;
-  max-height: 400px;
   object-fit: contain;
-  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.15));
-  position: relative;
-  z-index: 2;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.1));
 }
 
+/* Sisi Kanan: Area Teks & Spesifikasi */
 .fleet-modal-content-area {
-  padding: 3.5rem 3rem;
+  padding: 3rem 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow-y: auto;
 }
 
 .fleet-modal-content-area h2 {
@@ -2610,34 +2956,362 @@ a {
 
 .fleet-modal-content-area .desc {
   color: var(--text-muted);
-  font-size: 1.05rem;
-  line-height: 1.6;
   margin-bottom: 2rem;
+  line-height: 1.6;
 }
 
-/* Re-use specs-list layout for modal */
 .fleet-modal-content-area .specs-list {
-  margin-bottom: 2.5rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+  margin-bottom: 0; /* Reset margin bawah */
+}
+/* ==========================================
+   FLEET NAV BUTTONS (SVG ICONS)
+   ========================================== */
+.fleet-nav-buttons {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1.5rem; /* Jarak antar tombol agak dilebarkan sedikit */
+  z-index: 20;
 }
 
-/* Mobile Responsive */
-@media (max-width: 990px) {
-  .fleet-modal-container {
-    grid-template-columns: 1fr;
-    max-height: 85vh;
-    overflow-y: auto;
+/* Styling Khusus Tombol Ikon */
+.btn-nav-icon {
+  background: var(
+    --bg-light
+  ); /* Latar putih agar garis animasi di belakang tidak tembus */
+  border: 2px solid var(--brand-orange); /* Border oranye */
+  color: var(--brand-orange); /* Warna SVG oranye */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Membuat tombol bulat sempurna */
+  padding: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-nav-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Hover Effect: Oranye transparan, bukan hitam */
+.btn-nav-icon:hover {
+  background-color: rgba(255, 94, 0, 0.1); /* Background oranye sangat tipis */
+  transform: scale(1.08); /* Sedikit membesar saat disentuh kursor */
+}
+
+/* Saat tidak aktif (Disabled) */
+.btn-nav-icon:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+  border-color: var(--text-muted); /* Berubah abu-abu saat dinonaktifkan */
+  color: var(--text-muted);
+}
+
+/* Responsif untuk HP */
+@media (max-width: 768px) {
+  .fleet-nav-buttons {
+    bottom: 1.5rem;
   }
-  .fleet-modal-image-area {
-    padding: 2rem;
-    height: 300px;
+  .btn-nav-icon {
+    width: 45px;
+    height: 45px;
   }
-  .fleet-modal-close {
-    background: var(--bg-light);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  .btn-nav-icon svg {
+    width: 24px;
+    height: 24px;
   }
-  .fleet-modal-content-area {
-    padding: 2.5rem 2rem;
+}
+/* Styling khusus untuk video background di dalam bg-phase */
+.bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Membuat video memenuhi layar tanpa merusak proporsi */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* --- INLINE VIDEO LOGIC (WHY US SECTION) --- */
+.why-us-image.video-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.why-us-image .video-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+/* Pastikan video mengikuti bentuk potongan miring yang sama dengan foto */
+.why-us-image .inline-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none; /* Jangan tangkap klik sebelum aktif */
+  transition: opacity 0.4s ease;
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); /* Potongan Fase 1 */
+}
+
+.phase-2-img .inline-video {
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); /* Potongan Fase 2 */
+}
+
+/* Tombol Play Oranye di Tengah */
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  background-color: rgba(255, 94, 0, 0.85); /* brand-orange transparan */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 94, 0, 0.4);
+}
+
+.play-button svg {
+  width: 35px;
+  height: 35px;
+  color: #fff;
+  margin-left: 5px; /* Agar segitiga terlihat presisi di tengah lingkaran */
+}
+
+.why-us-image:hover .play-button {
+  transform: translate(-50%, -50%) scale(1.1);
+  background-color: rgba(255, 94, 0, 1);
+  box-shadow: 0 0 30px rgba(255, 94, 0, 0.6);
+}
+
+/* State Saat Video Dimainkan via JavaScript */
+.why-us-image.is-playing .video-cover,
+.why-us-image.is-playing .play-button {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.why-us-image.is-playing .inline-video {
+  opacity: 1;
+  pointer-events: auto; /* Izinkan klik untuk pause/play bawaan video */
+}
+
+/* Hapus potongan miring di layar HP agar video kotak normal */
+@media (max-width: 992px) {
+  .why-us-image .inline-video,
+  .phase-2-img .inline-video {
+    clip-path: none;
+  }
+}
+
+/* --- INLINE VIDEO LOGIC (HANYA UNTUK TOMBOL PLAY) --- */
+.why-us-image.video-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.why-us-image .video-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+/* Tombol Play Oranye di Tengah */
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  background-color: rgba(255, 94, 0, 0.85);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 94, 0, 0.4);
+}
+
+.play-button svg {
+  width: 35px;
+  height: 35px;
+  color: #fff;
+  margin-left: 5px;
+}
+
+.why-us-image:hover .play-button {
+  transform: translate(-50%, -50%) scale(1.1);
+  background-color: rgba(255, 94, 0, 1);
+  box-shadow: 0 0 30px rgba(255, 94, 0, 0.6);
+}
+
+/* ==========================================
+   VIDEO MODAL OVERLAY (POP-UP)
+   ========================================== */
+.video-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9); /* Latar belakang sangat gelap */
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+
+.video-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-modal-container {
+  position: relative;
+  width: 90%;
+  max-width: 1000px; /* Ukuran maksimal video di Desktop */
+  aspect-ratio: 16 / 9; /* Memaksa bentuk kotak memanjang (widescreen) */
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  transform: scale(0.95) translateY(30px);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.video-modal-overlay.active .video-modal-container {
+  transform: scale(1) translateY(0);
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.video-modal-close:hover {
+  background: var(--brand-orange);
+  transform: rotate(90deg);
+}
+
+#modal-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Memastikan seluruh video masuk ke layar tanpa terpotong */
+  display: block;
+}
+/* ==========================================
+   INLINE PLAY BUTTON (THE AIRCRAFT SECTION)
+   ========================================== */
+.cta-action-group {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Meng-override gaya absolute dari .play-button bawaan */
+button.btn-play-inline.play-button {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: auto;
+  height: auto;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+button.btn-play-inline.play-button:hover {
+  transform: translateY(-2px);
+  background: transparent;
+  box-shadow: none;
+}
+
+button.btn-play-inline .icon-circle {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 94, 0, 0.85);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 94, 0, 0.4);
+}
+
+button.btn-play-inline:hover .icon-circle {
+  background-color: var(--brand-orange);
+  box-shadow: 0 0 25px rgba(255, 94, 0, 0.6);
+  transform: scale(1.1);
+}
+
+button.btn-play-inline svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 3px; /* Memastikan ikon segitiga rata tengah */
+}
+
+/* Meratakan tombol ke tengah di layar HP */
+@media (max-width: 992px) {
+  .cta-action-group {
+    justify-content: center !important;
   }
 }

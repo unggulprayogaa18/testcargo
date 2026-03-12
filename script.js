@@ -219,79 +219,169 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+   // ==========================================
+    // 8. FLEET SCROLLYTELLING LOGIC (Dengan Tombol Prev & Next)
     // ==========================================
-    // 8. FLEET DETAILS OVERLAY (MODAL) LOGIC
-    // ==========================================
-    const fleetLinks = document.querySelectorAll('.fleet-card .card-link');
+    const fleetScrolly = document.getElementById('fleet-scrolly');
+    const fleetPhase1 = document.querySelector('.fleet-phase-1');
+    const fleetPhase2 = document.querySelector('.fleet-phase-2');
     
-    // Buat elemen overlay modal dan suntikkan ke body
-    const modalOverlay = document.createElement('div');
-    modalOverlay.className = 'fleet-modal-overlay';
-    modalOverlay.innerHTML = `
-        <div class="fleet-modal-container">
-            <button class="fleet-modal-close">&times;</button>
-            <div class="fleet-modal-image-area">
-                <img src="" id="modal-img" alt="Drone Image">
-            </div>
-            <div class="fleet-modal-content-area">
-                <span class="eyebrow" id="modal-badge"></span>
-                <h2 id="modal-title"></h2>
-                <p class="desc" id="modal-desc"></p>
-                <ul class="specs-list" id="modal-specs"></ul>
-                <button class="btn btn-primary" style="width: 100%;">Download Data Sheet</button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modalOverlay);
+    // Ambil elemen tombol
+    const btnPrevPhase = document.getElementById('btn-prev-phase');
+    const btnNextPhase = document.getElementById('btn-next-phase');
 
-    const closeBtn = modalOverlay.querySelector('.fleet-modal-close');
+    if (fleetScrolly && fleetPhase1 && fleetPhase2) {
+        
+        // 1. Logika saat halaman di-scroll manual
+        window.addEventListener('scroll', () => {
+            const rect = fleetScrolly.getBoundingClientRect();
+            
+            // Hitung progress scroll (0.0 sampai 1.0)
+            let scrollProgress = -rect.top / (rect.height - window.innerHeight);
 
-    // Fungsi membuka modal dan mempopulasi data
-    function openModal(cardElement) {
-        // Ambil data dari kartu HTML yang diklik
-        const imgSrc = cardElement.querySelector('img').src;
-        const badgeText = cardElement.querySelector('.card-badge').innerText;
-        const title = cardElement.querySelector('h3').innerText;
-        const desc = cardElement.querySelector('.card-desc').innerText;
-        const specsHTML = cardElement.querySelector('.specs-list').innerHTML;
-
-        // Masukkan data ke dalam modal
-        modalOverlay.querySelector('#modal-img').src = imgSrc;
-        modalOverlay.querySelector('#modal-badge').innerText = badgeText;
-        modalOverlay.querySelector('#modal-title').innerText = title;
-        modalOverlay.querySelector('#modal-desc').innerText = desc;
-        modalOverlay.querySelector('#modal-specs').innerHTML = specsHTML;
-
-        // Tampilkan modal & hentikan scroll di background
-        modalOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    // Fungsi menutup modal
-    function closeModal() {
-        modalOverlay.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-
-    // Event listener untuk tombol "View Details"
-    fleetLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault(); // Mencegah pindah halaman
-            const card = e.target.closest('.fleet-card');
-            if (card) openModal(card);
+            // Eksekusi jika section terlihat di layar
+            if (scrollProgress >= -0.2 && scrollProgress <= 1.2) {
+                // Di bawah 50% = Fase 1 Aktif
+                if (scrollProgress < 0.5) {
+                    fleetPhase1.classList.add('active');
+                    fleetPhase2.classList.remove('active');
+                    
+                    // Update status tombol
+                    if (btnPrevPhase) btnPrevPhase.disabled = true;
+                    if (btnNextPhase) btnNextPhase.disabled = false;
+                } 
+                // Di atas 50% = Fase 2 Aktif
+                else {
+                    fleetPhase1.classList.remove('active');
+                    fleetPhase2.classList.add('active');
+                    
+                    // Update status tombol
+                    if (btnPrevPhase) btnPrevPhase.disabled = false;
+                    if (btnNextPhase) btnNextPhase.disabled = true;
+                }
+            }
         });
-    });
 
-    // Event listener untuk tombol close, klik di luar modal, dan tombol Escape
-    closeBtn.addEventListener('click', closeModal);
-    
-    modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) closeModal();
-    });
+        // 2. Logika saat tombol diklik (Otomatis men-scroll halaman)
+        if (btnPrevPhase && btnNextPhase) {
+            
+            btnNextPhase.addEventListener('click', () => {
+                // Scroll ke bawah sejauh 60% dari tinggi section agar masuk ke Fase 2
+                const targetY = fleetScrolly.offsetTop + ((fleetScrolly.offsetHeight - window.innerHeight) * 0.6);
+                window.scrollTo({ top: targetY, behavior: 'smooth' });
+            });
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
-            closeModal();
+            btnPrevPhase.addEventListener('click', () => {
+                // Scroll kembali ke bagian paling atas section agar masuk ke Fase 1
+                const targetY = fleetScrolly.offsetTop;
+                window.scrollTo({ top: targetY, behavior: 'smooth' });
+            });
+            
         }
-    });
+    }
+
+    // ==========================================
+    // 9. FLEET MODAL / VIEW DETAILS LOGIC
+    // ==========================================
+    const fleetLinks = document.querySelectorAll('.card-link');
+    const modalOverlay = document.getElementById('fleet-modal');
+    const modalClose = document.getElementById('modal-close');
+
+    if (fleetLinks.length > 0 && modalOverlay) {
+        fleetLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Mencegah pindah halaman
+                
+                // Ambil data dari kartu (card) induk tempat tombol diklik
+                const card = link.closest('.fleet-card');
+                const title = card.querySelector('h3').innerHTML;
+                const desc = card.querySelector('.card-desc').innerHTML;
+                const imgSrc = card.querySelector('img').src;
+                const specs = card.querySelector('.specs-list').innerHTML;
+
+                // Masukkan data tersebut ke dalam elemen Modal
+                document.getElementById('modal-title').innerHTML = title;
+                document.getElementById('modal-desc').innerHTML = desc;
+                document.getElementById('modal-img').src = imgSrc;
+                document.getElementById('modal-specs').innerHTML = specs;
+
+                // Tampilkan animasi pop-up modal
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Kunci scroll layar belakang
+            });
+        });
+
+        // Logika untuk menutup modal
+        const closeModal = () => {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Kembalikan scroll layar
+        };
+
+        // Tutup saat tombol X diklik
+        modalClose.addEventListener('click', closeModal);
+
+        // Tutup saat area gelap di luar modal diklik
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+    }
+
+
+   // ==========================================
+    // 10. WHY US VIDEO MODAL LOGIC
+    // ==========================================
+   const videoPlayButtons = document.querySelectorAll('.play-button, .open-video-modal');
+    const videoModal = document.getElementById('video-modal');
+    const videoModalClose = document.getElementById('video-modal-close');
+    const modalVideoPlayer = document.getElementById('modal-video-player');
+
+    if (videoPlayButtons.length > 0 && videoModal) {
+        
+        // Buka Modal saat tombol play diklik
+        videoPlayButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Ambil link video dari atribut data-video-src
+                const videoSrc = this.getAttribute('data-video-src');
+                
+                if (videoSrc) {
+                    modalVideoPlayer.src = videoSrc;
+                    videoModal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Kunci scroll layar belakang
+                    
+                    // Mainkan video dengan sedikit delay agar animasi pop-up selesai dulu
+                    setTimeout(() => {
+                        modalVideoPlayer.play();
+                    }, 300);
+                }
+            });
+        });
+
+        // Fungsi untuk menutup Modal
+        const closeVideoModal = () => {
+            videoModal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Buka kembali scroll
+            
+            // Jeda sejenak sebelum menghapus link video agar animasinya mulus
+            setTimeout(() => {
+                modalVideoPlayer.pause();
+                modalVideoPlayer.src = '';
+            }, 400); 
+        };
+
+        // Tutup saat tombol X diklik
+        if (videoModalClose) {
+            videoModalClose.addEventListener('click', closeVideoModal);
+        }
+
+        // Tutup saat area gelap di luar video diklik
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeVideoModal();
+            }
+        });
+    }
 });
