@@ -153,68 +153,51 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+   // ==========================================
+    // 6.5 RACS OVERVIEW SCROLLYTELLING LOGIC
     // ==========================================
-    // 6. WHY US SCROLLYTELLING LOGIC
-    // ==========================================
-    const whyUsScrolly = document.getElementById('why-us-scrolly');
-    const phase1 = document.querySelector('.phase-1');
-    const phase2 = document.querySelector('.phase-2');
+    const racsOverviewSection = document.getElementById('about-racs');
+    const racsPhase1 = document.querySelector('.racs-block-1');
+    const racsPhase2 = document.querySelector('.racs-block-2');
 
-    if (whyUsScrolly && phase1 && phase2) {
+    if (racsOverviewSection && racsPhase1 && racsPhase2) {
         window.addEventListener('scroll', () => {
-            const rect = whyUsScrolly.getBoundingClientRect();
-            
-            // Hitung progress scroll di dalam section (0.0 sampai 1.0)
-            // rect.top akan bernilai negatif saat kita scroll melewati elemen
+            const rect = racsOverviewSection.getBoundingClientRect();
+            // Hitung persentase scroll (0.0 sampai 1.0)
             let scrollProgress = -rect.top / (rect.height - window.innerHeight);
 
-            // Hanya eksekusi jika section sedang terlihat di layar
+            // Eksekusi jika section terlihat di layar
             if (scrollProgress >= -0.2 && scrollProgress <= 1.2) {
-                // Saat scroll mencapai 50% dari section, ganti ke Fase 2
+                // Di bawah 50% = Fase 1 Aktif (What is RACS)
                 if (scrollProgress < 0.5) {
-                    phase1.classList.add('active');
-                    phase2.classList.remove('active');
-                } else {
-                    phase1.classList.remove('active');
-                    phase2.classList.add('active');
+                    racsPhase1.classList.add('active');
+                    racsPhase2.classList.remove('active');
+                } 
+                // Di atas 50% = Fase 2 Aktif (Cargo Concept)
+                else {
+                    racsPhase1.classList.remove('active');
+                    racsPhase2.classList.add('active');
                 }
             }
         });
     }
 
  // ==========================================
-    // 7. PARTNER SCROLLYTELLING LOGIC
+    // 7. PARTNER SCROLLYTELLING LOGIC (Simplified for RevOPS Only)
     // ==========================================
     const partnerScrolly = document.getElementById('partner-scrolly');
     const pPhase1 = document.querySelector('.p-phase-1');
-    const pPhase2 = document.querySelector('.p-phase-2');
-    // Ambil elemen background baru
     const bgPhase1 = document.querySelector('.bg-phase-1');
-    const bgPhase2 = document.querySelector('.bg-phase-2');
 
-    if (partnerScrolly && pPhase1 && pPhase2) {
+    if (partnerScrolly && pPhase1) {
         window.addEventListener('scroll', () => {
             const rect = partnerScrolly.getBoundingClientRect();
-            
-            // Hitung progress scroll di dalam section partner (0.0 sampai 1.0)
             let scrollProgress = -rect.top / (rect.height - window.innerHeight);
 
-            // Eksekusi hanya jika area terlihat di viewport
-            if (scrollProgress >= -0.2 && scrollProgress <= 1.2) {
-                // Di bawah 50% scroll = Kiri (Phase 1)
-                if (scrollProgress < 0.5) {
-                    pPhase1.classList.add('active');
-                    pPhase2.classList.remove('active');
-                    if (bgPhase1) bgPhase1.classList.add('active');
-                    if (bgPhase2) bgPhase2.classList.remove('active');
-                } 
-                // Di atas 50% scroll = Kanan (Phase 2)
-                else {
-                    pPhase1.classList.remove('active');
-                    pPhase2.classList.add('active');
-                    if (bgPhase1) bgPhase1.classList.remove('active');
-                    if (bgPhase2) bgPhase2.classList.add('active');
-                }
+            // Karena cuma 1 fase, kita cukup pastikan dia aktif saat masuk viewport
+            if (scrollProgress >= -0.5 && scrollProgress <= 1.5) {
+                pPhase1.classList.add('active');
+                if (bgPhase1) bgPhase1.classList.add('active');
             }
         });
     }
@@ -384,4 +367,36 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+// ==========================================
+    // 11. WHY US SCROLLYTELLING LOGIC (RevNAV & RevFleet)
+    // ==========================================
+    const whyUsScrolly = document.getElementById('why-us-scrolly');
+    const whyPhase1 = whyUsScrolly ? whyUsScrolly.querySelector('.phase-1') : null;
+    const whyPhase2 = whyUsScrolly ? whyUsScrolly.querySelector('.phase-2') : null;
+
+    if (whyUsScrolly && whyPhase1 && whyPhase2) {
+        window.addEventListener('scroll', () => {
+            const rect = whyUsScrolly.getBoundingClientRect();
+            
+            // Hitung progress scroll dari 0.0 sampai 1.0
+            let scrollProgress = -rect.top / (rect.height - window.innerHeight);
+
+            // Eksekusi transisi jika section sedang terlihat di layar
+            if (scrollProgress >= -0.2 && scrollProgress <= 1.2) {
+                
+                // Di bawah 50% = Fase 1 Aktif (RevNAV)
+                if (scrollProgress < 0.5) {
+                    whyPhase1.classList.add('active');
+                    whyPhase2.classList.remove('active');
+                } 
+                // Di atas 50% = Fase 2 Aktif (RevFleet)
+                else {
+                    whyPhase1.classList.remove('active');
+                    whyPhase2.classList.add('active');
+                }
+                
+            }
+        });
+    }
+    
 });

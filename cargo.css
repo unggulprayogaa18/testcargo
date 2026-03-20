@@ -63,13 +63,47 @@ a {
 }
 
 .nav-links {
+  position: relative; /* Wajib ditambahkan untuk memosisikan layer dalam */
   display: flex;
   gap: 3rem;
+  height: 100%;
+  align-items: center;
+  padding: 0 4rem;
+  /* Potongan miring luar (Outer Shape) */
+  clip-path: polygon(0 0, 100% 0, calc(100% - 35px) 100%, 35px 100%);
+  
+  /* BACKGROUND METALLIC (Chrome / Titanium Gradient) */
+  /* background: linear-gradient(
+    135deg, 
+    #fdfdfd 0%, 
+    #a1a1aa 25%, 
+    #ffffff 50%, 
+    #52525b 75%, 
+    #e4e4e7 100%
+  ); */
+  
+  z-index: 1;
+}
+
+/* LAYER DALAM: Warna Hitam Pekat */
+.nav-links::before {
+  content: "";
+  position: absolute;
+  /* Inset 2px menciptakan ketebalan border metallic 2px di seluruh sisi */
+  inset: 2px; 
+  z-index: -1; /* Taruh di belakang teks menu agar tetap bisa diklik */
+  
+  /* Base warna hitam pekat aslimu */
+  /* background-color: #0b0909a9; 
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(5, 1, 1, 0.05) 100%);
+   */
+  /* Potongan miring dalam (dibuat 33px agar presisi sejajar dengan luar yang 35px) */
+  /* clip-path: polygon(0 0, 100% 0, calc(100% - 33px) 100%, 33px 100%); */
 }
 
 .nav-links a {
   font-size: 0.95rem;
-  color: var(--text-main);
+  color: #000000;
   font-weight: 600;
   transition: color 0.3s ease;
 }
@@ -802,28 +836,70 @@ a {
     left: 2rem;
   }
 }
-
+/* ==========================================================
+   PERBAIKAN RESPONSIVE FLEET SECTION (CENTERED CAROUSEL)
+   ========================================================== */
+/* ==========================================================
+   PERBAIKAN RESPONSIVE FLEET SECTION (VERTICAL STACK)
+   ========================================================== */
 @media (max-width: 768px) {
-  .fleet-grid {
-    grid-template-columns: 1fr;
+  /* 1. Ubah kembali menjadi Grid Vertikal bersusun ke bawah */
+  .fleet-grid, 
+  .fleet-grid-2 {
+    display: grid !important;
+    grid-template-columns: 1fr !important; /* 1 Kolom penuh */
+    gap: 1.5rem !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 5px 2rem 5px !important; /* Sedikit padding agar bayangan kartu tidak terpotong */
+    
+    /* KUNCI: Tambahkan vertical scroll di area kartu agar tidak keluar batas layar */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    max-height: 55vh !important; /* Batasi tinggi area kartu, sisakan ruang untuk judul & tombol */
+    
+    /* Biar scroll-nya mulus di HP */
+    -webkit-overflow-scrolling: touch;
   }
-  .impact-visuals {
-    height: 400px;
+
+  /* Desain scrollbar tipis yang elegan agar terlihat rapi */
+  .fleet-grid::-webkit-scrollbar, 
+  .fleet-grid-2::-webkit-scrollbar {
+    width: 4px;
   }
-  .cta-buttons {
+  .fleet-grid::-webkit-scrollbar-thumb, 
+  .fleet-grid-2::-webkit-scrollbar-thumb {
+    background-color: var(--brand-orange);
+    border-radius: 4px;
+  }
+
+  /* 2. Reset ukuran kartu agar mengambil lebar penuh area */
+  .fleet-grid .fleet-card, 
+  .fleet-grid-2 .fleet-card {
+    flex: auto !important;
+    max-width: 100% !important;
+  }
+
+  /* 3. Penyesuaian Phase & Header agar posisinya pas di layar HP */
+  .fleet-phase {
+    max-height: 90vh !important;
+    display: flex !important;
     flex-direction: column;
+    justify-content: flex-start !important; /* Susun dari atas ke bawah */
+    padding-top: 15vh !important; /* Jarak aman dari navbar atas */
   }
-  .light-footer .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
+
+  .fleet-phase .section-header-modern {
+    margin-bottom: 1.5rem !important;
+    flex-shrink: 0; /* Mencegah area judul ikut menyusut */
   }
-  .light-footer .footer-bottom {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
+
+  /* 4. Pastikan tombol Navigasi tetap aman di bagian bawah layar */
+  .fleet-nav-buttons {
+    bottom: 2rem !important;
+    z-index: 50 !important;
   }
 }
-
 /* --- TECHNICAL SPECIFICATIONS TABLE --- */
 .tech-specs-section {
   padding: 6rem 5%;
@@ -1027,7 +1103,7 @@ a {
   /* Ubah Nav-Links menjadi menu Dropdown vertikal */
   .nav-links {
     position: absolute;
-    top: 90px; /* Sesuai dengan tinggi navbar */
+    top: 90px;
     left: 0;
     width: 100%;
     background-color: var(--bg-light);
@@ -1038,13 +1114,20 @@ a {
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
     border-bottom: 1px solid var(--border-color);
 
-    /* Efek animasi tersembunyi (geser ke atas) */
+    /* --- TAMBAHAN RESET UNTUK HP --- */
+    height: auto; 
+    clip-path: none; /* Hilangkan potongan miring di layar HP */
+    
     transform: translateY(-150%);
     opacity: 0;
     transition: all 0.4s ease-in-out;
     z-index: 99;
   }
 
+  /* --- TAMBAHAN: Kembalikan warna teks jadi gelap saat di HP --- */
+  .nav-links a {
+    color: var(--text-main); 
+  }
   /* Saat menu aktif (diklik dari JavaScript) */
   .nav-links.active {
     transform: translateY(0);
@@ -1373,7 +1456,7 @@ a {
 .cta-overlay-sticky {
   position: absolute;
   inset: 0;
-  height:100vh;
+  
   background: linear-gradient(
     90deg,
     rgb(0 0 0 / 95%) 0%,
@@ -1396,7 +1479,7 @@ a {
   gap: 15px;
   margin-bottom: 1rem;
 }
-http://127.0.0.1:3000/pushgithubcargo/index.html?serverWindowId=b734f7bf-3eca-410d-be27-9da07f4c50fa#
+
 
 .cta-header .line {
   width: 50px;
@@ -1565,10 +1648,33 @@ http://127.0.0.1:3000/pushgithubcargo/index.html?serverWindowId=b734f7bf-3eca-41
   line-height: 1.7;
 }
 
+/* Pastikan grid metrics memiliki tinggi yang sama */
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+  align-items: stretch; /* Membuat semua box tingginya sama */
+}
+
+.metric-item {
+  height: 100%; /* Memaksa box mengisi ruang grid */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--bg-light); /* Tambahkan agar tidak transparan jika diinginkan */
+}
+
+/* Fix untuk Reveal agar tidak merusak layout saat loading */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  will-change: transform, opacity;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .metric-item {
@@ -2233,10 +2339,9 @@ http://127.0.0.1:3000/pushgithubcargo/index.html?serverWindowId=b734f7bf-3eca-41
 .partner-scrolly {
   position: relative;
   background-color: #09090b;
-  height: 150vh; /* Memberi ruang scroll */
-  padding-top: 1px; /* Mencegah margin collapse / kebocoran layout */
+  height: 100vh; /* UBAH INI: Dari 150vh jadi 100vh */
+  padding-top: 1px; 
 }
-
 .partner-sticky {
   position: sticky;
   top: 15vh; /* Berhenti sedikit di bawah ujung atas layar agar elegan */
@@ -3317,5 +3422,480 @@ button.btn-play-inline svg {
 @media (max-width: 992px) {
   .cta-action-group {
     justify-content: center !important;
+  }
+}
+/* ==========================================
+   BINTIK / HALFTONE SECTION (DAVIES STYLE)
+   ========================================== */
+.bintik-section {
+  position: relative;
+  background-color: #000;
+  height: 100vh;
+  padding-top: 1px;
+}
+
+.bintik-overlay {
+  position: absolute;
+  inset: 0;
+  /* Lapisan 1: Hitam tebal di pinggir (Vignette) agar fokus ke tengah */
+  /* Lapisan 2: Pola titik-titik (Bintik/Halftone) hitam */
+  background: 
+    radial-gradient(circle at center, transparent 10%, rgba(0, 0, 0, 0.95) 80%),
+    radial-gradient(circle, #000 1.5px, transparent 1.5px);
+  background-size: 100% 100%, 4px 4px;
+  z-index: 1;
+  pointer-events: none; /* Agar tidak menghalangi klik pada tombol */
+}
+
+.bintik-content-stack {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 6rem 5% 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Mendorong elemen rapi ke ujung atas & bawah */
+}
+
+.bintik-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.bintik-title-left,
+.bintik-title-right {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.bintik-title-right {
+  text-align: right;
+}
+
+.bintik-bottom-row {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.bintik-desc-box {
+  max-width: 600px;
+}
+
+.bintik-desc-box p {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: #a1a1aa; /* Warna abu-abu redup mirip di foto */
+  line-height: 1.6;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Penyesuaian Responsif Layar HP */
+@media (max-width: 768px) {
+  .bintik-content-stack {
+    padding: 6rem 5% 2rem;
+  }
+  .bintik-title-left,
+  .bintik-title-right {
+    font-size: 2.5rem;
+  }
+  .bintik-desc-box p {
+    font-size: 1rem;
+  }
+}/* Efek Garis Atas Mengkilap (Fade Edges) */
+/* ==========================================
+   RACS OVERVIEW SCROLLYTELLING
+   ========================================== */
+.racs-overview-section {
+  position: relative;
+  /* Tambahkan Background Awan sesuai gambar desain */
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  height: 200vh; 
+  z-index: 2;
+}
+
+/* Overlay putih transparan agar awan terlihat estetik dan teks tetap terbaca */
+.racs-overview-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Mengunci layar agar tidak bergerak ke bawah selama fase berjalan */
+.racs-sticky-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 5%;
+}
+
+/* Base style untuk setiap Blok/Fase (Menunggu di bawah, tersembunyi) */
+.racs-block {
+  position: absolute;
+  width: 100%;
+  max-width: 1200px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; 
+  transform: translateY(100px);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Saat Blok Aktif (Muncul ke tengah layar) */
+.racs-block.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Animasi khusus Blok 1: Saat scroll ke bawah, Blok 1 menghilang ke atas layar */
+.racs-block-1:not(.active) {
+  transform: translateY(-100px);
+}
+
+/* FIX: Paksa semua elemen reveal di dalam scrollytelling untuk langsung muncul saat fasenya aktif */
+.racs-block.active .reveal {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.racs-eyebrow {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--brand-orange);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+/* --- BLOK 1: METRICS & WHAT IS RACS --- */
+.racs-metrics-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; 
+  gap: 5rem;
+  align-items: center;
+}
+
+.racs-metrics-header h2 {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+}
+
+.racs-metrics-header p {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.racs-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  align-items: stretch; 
+}
+
+.racs-metric-item {
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+.racs-metric-item:hover {
+  border-color: var(--brand-orange);
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.racs-metric-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle at top right, rgba(255, 94, 0, 0.08), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.racs-metric-item:hover::before {
+  opacity: 1;
+}
+
+.racs-metric-number {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(3rem, 4vw, 4rem);
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.racs-text-orange {
+  color: var(--brand-orange);
+  font-size: 1.8rem;
+  vertical-align: super;
+  margin-left: 2px;
+}
+
+.racs-metric-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* --- BLOK 2: CARGO DETAIL (INTERMODAL INTEGRATION) --- */
+.racs-detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Sesuai proporsi gambar desain */
+  gap: 5rem;
+  align-items: center;
+}
+
+.racs-text-content {
+  max-width: 550px;
+}
+
+.racs-title-large {
+  font-size: clamp(2.5rem, 4vw, 3.8rem);
+  color: var(--text-main);
+  margin-bottom: 1.2rem;
+  line-height: 1.1;
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.racs-description {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.racs-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.racs-feature-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.racs-feature-icon {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.racs-feature-text h4 {
+  font-family: "Inter", sans-serif;
+  color: var(--text-main);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.racs-feature-text p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0; 
+  line-height: 1.6;
+}
+
+/* VISUAL PALLET BARS - PERSIS SEPERTI GAMBAR */
+.racs-pallet-bars {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.racs-pallet-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.racs-pallet-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.racs-pallet-info span {
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.racs-pallet-info strong {
+  color: var(--text-main);
+  font-weight: 800;
+}
+
+.racs-bar-bg {
+  width: 100%;
+  height: 6px; 
+  background-color: rgba(0,0,0,0.06); /* Latar bar abu-abu sangat muda */
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.racs-bar-fill {
+  height: 100%;
+  background-color: var(--brand-orange); 
+  border-radius: 4px;
+  transition: width 1.5s ease-out;
+}
+
+/* TECH IMAGE WRAPPER - STYLE KARTU PUTIH BERSIH */
+.racs-image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.racs-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08); /* Bayangan lembut */
+}
+
+.racs-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 992px) {
+  /* HAPUS override height:auto dan position:relative agar Scrolly tetap jalan! */
+  .racs-metrics-container,
+  .racs-detail-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem; /* Gap dirapatkan agar hemat tempat vertikal */
+  }
+
+  /* Fase 2: Gambar di atas teks, dikecilkan sedikit */
+  .racs-image-container {
+    order: -1; 
+    max-width: 70%; 
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Pastikan kontainer lengket mulai dari atas, beri jarak untuk Navbar HP */
+  .racs-sticky-container {
+    align-items: flex-start;
+    padding-top: 100px; 
+  }
+
+  /* Ubah animasi agar tidak terlalu jauh naiknya di HP */
+  .racs-block {
+    transform: translateY(50px);
+  }
+  .racs-block-1:not(.active) {
+    transform: translateY(-50px);
+  }
+
+  /* KECILKAN TEKS & GAP AGAR MUAT DI LAYAR HP */
+  .racs-metrics-header h2,
+  .racs-title-large {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .racs-metrics-header p,
+  .racs-description {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  /* Biarkan grid metrics tetap 2 kolom di HP agar tidak manjang ke bawah */
+  .racs-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .racs-metric-item {
+    padding: 1.2rem;
+  }
+
+  .racs-metric-number {
+    font-size: 2rem;
+  }
+
+  /* Rapatkan list fitur Fase 2 */
+  .racs-features-list {
+    gap: 1rem;
+  }
+
+  .racs-feature-text h4 {
+    font-size: 1rem;
+  }
+
+  .racs-feature-text p {
+    font-size: 0.85rem;
+  }
+
+  .racs-pallet-bars {
+    margin-top: 0.5rem;
+    gap: 0.8rem;
+  }
+
+  .racs-image-container {
+    max-width: 85%;
+  }
+  
+  .racs-image-wrapper {
+    padding: 1rem;
   }
 }
